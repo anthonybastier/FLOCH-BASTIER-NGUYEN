@@ -1,7 +1,7 @@
 # Pokémon: projet informatique
 
-Marie-Dominique Van Damme: marie-dominique.van-damme@ensg.eu
-Melvin Hersent: melvin.hersent@map.cnrs.fr
+* Marie-Dominique Van Damme: marie-dominique.van-damme@ensg.eu
+* Melvin Hersent: melvin.hersent@map.cnrs.fr
 
 ## Matériel de départ
 
