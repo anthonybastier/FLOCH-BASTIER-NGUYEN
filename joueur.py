@@ -6,7 +6,7 @@ Created on Fri May  3 11:28:31 2024
 """
 
 #Import des Pokemons
-from startpokemonanais import liste_pokemon, Pokemon
+from startpokemonanais import liste_pokemon
 
 #Import des modules 
 import random as rd
@@ -34,7 +34,7 @@ class joueur:
         
         for i in range(nb_pokemon):
             index = rd.randint(0,150) #Parmi les 151 pokemons
-            self.pokemon.append(liste_pokemon[index])
+            self.team.append(liste_pokemon[index])
     
     def combat(self, pokemon_adv):
         """
@@ -62,7 +62,7 @@ class joueur:
         None.
 
         """
-        pokemon_actuel = self.equipe[0]
+        pokemon_actuel = self.team[0]
         fuite = False
         while pokemon_adv.HP > 0 and pokemon_actuel.HP > 0 and not(fuite):
             
@@ -85,5 +85,3 @@ class joueur:
                 print ("Pokemon in your team :")
                 print()
             
-
-    
