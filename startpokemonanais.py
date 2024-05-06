@@ -45,7 +45,10 @@ class Pokemon():
             k = 0.5
         elif pokemon.type == "Ghost" :
             k = 0
-        return pokemon.HP - k * degats  
+        degats_attenues = pokemon.defense - k * degats
+        if degats_attenues > 0 :
+            return pokemon.HP - degats_attenues
+        else : return pokemon.HP
         
     @abstractmethod
     def attaque_spe(self, pokemon):
@@ -72,7 +75,11 @@ class Steel(Pokemon):
             k = 2 
         elif pokemon.type == "Steel" or pokemon.type == "Water" or pokemon.type == "Fire" or pokemon.type == "Electric" :
             k = 0.5
-        return pokemon.HP - k * degats  
+            
+        degats_attenues = pokemon.sp_def - k * degats
+        if degats_attenues > 0 :
+            return pokemon.HP - degats_attenues
+        else : return pokemon.HP
 
  
 class Fighting(Pokemon):
@@ -89,7 +96,11 @@ class Fighting(Pokemon):
             k = 2 
         elif pokemon.type == "Psychic" or pokemon.type == "Bug" or pokemon.type == "Fairy" or pokemon.type == "Poison" or pokemon.type == "Flying" :
             k = 0.5
-        return pokemon.HP - k * degats
+            
+        degats_attenues = pokemon.sp_def - k * degats
+        if degats_attenues > 0 :
+            return pokemon.HP - degats_attenues
+        else : return pokemon.HP
   
     
 class Dragon(Pokemon):
@@ -108,7 +119,11 @@ class Dragon(Pokemon):
             k = 0.5
         elif pokemon.type == "Fairy":
             k = 0
-        return pokemon.HP - k * degats
+            
+        degats_attenues = pokemon.sp_def - k * degats
+        if degats_attenues > 0 :
+            return pokemon.HP - degats_attenues
+        else : return pokemon.HP
     
     
 class Water(Pokemon):
@@ -125,7 +140,11 @@ class Water(Pokemon):
             k = 2 
         elif pokemon.type == "Dragon" or pokemon.type == "Water" or pokemon.type == "Plant" :
             k = 0.5
-        return pokemon.HP - k * degats
+        
+        degats_attenues = pokemon.sp_def - k * degats
+        if degats_attenues > 0 :
+            return pokemon.HP - degats_attenues
+        else : return pokemon.HP
     
     
 class Electric(Pokemon):
@@ -144,7 +163,11 @@ class Electric(Pokemon):
             k = 0.5
         elif pokemon.type == "Ground":
             k = 0
-        return pokemon.HP - k * degats
+        
+        degats_attenues = pokemon.sp_def - k * degats
+        if degats_attenues > 0 :
+            return pokemon.HP - degats_attenues
+        else : return pokemon.HP
     
     
 class Fire(Pokemon):
@@ -161,7 +184,11 @@ class Fire(Pokemon):
             k = 2 
         elif pokemon.type == "Water" or pokemon.type == "Dragon" or pokemon.type == "Fire" or pokemon.type == "Rock" :
             k = 0.5
-        return pokemon.HP - k * degats
+        
+        degats_attenues = pokemon.sp_def - k * degats
+        if degats_attenues > 0 :
+            return pokemon.HP - degats_attenues
+        else : return pokemon.HP
     
     
 class Fairy(Pokemon):
@@ -178,7 +205,11 @@ class Fairy(Pokemon):
             k = 2 
         elif pokemon.type == "Steel" or pokemon.type == "Fire" or pokemon.type == "Poison" :
             k = 0.5
-        return pokemon.HP - k * degats
+        
+        degats_attenues = pokemon.sp_def - k * degats
+        if degats_attenues > 0 :
+            return pokemon.HP - degats_attenues
+        else : return pokemon.HP
    
     
 class Ice(Pokemon):
@@ -195,7 +226,11 @@ class Ice(Pokemon):
             k = 2 
         elif pokemon.type == "Water" or pokemon.type == "Steel" or pokemon.type == "Fire" or pokemon.type == "Ice" :
             k = 0.5
-        return pokemon.HP - k * degats
+        
+        degats_attenues = pokemon.sp_def - k * degats
+        if degats_attenues > 0 :
+            return pokemon.HP - degats_attenues
+        else : return pokemon.HP
     
     
 class Bug(Pokemon):
@@ -212,7 +247,11 @@ class Bug(Pokemon):
             k = 2 
         elif pokemon.type == "Fighting" or pokemon.type == "Steel" or pokemon.type == "Fire" or pokemon.type == "Fairy" or pokemon.type == "Poison" or pokemon.type == "Ghost" or pokemon.type == "Flying":
             k = 0.5
-        return pokemon.HP - k * degats
+        
+        degats_attenues = pokemon.sp_def - k * degats
+        if degats_attenues > 0 :
+            return pokemon.HP - degats_attenues
+        else : return pokemon.HP
   
     
 class Normal(Pokemon):
@@ -229,7 +268,11 @@ class Normal(Pokemon):
             k = 0 
         elif pokemon.type == "Rock" or pokemon.type == "Steel" :
             k = 0.5
-        return pokemon.HP - k * degats
+        
+        degats_attenues = pokemon.sp_def - k * degats
+        if degats_attenues > 0 :
+            return pokemon.HP - degats_attenues
+        else : return pokemon.HP
 
 
 class Plant(Pokemon):
@@ -246,7 +289,11 @@ class Plant(Pokemon):
             k = 2 
         elif pokemon.type == "Steel" or pokemon.type == "Dragon" or pokemon.type == "Fire" or pokemon.type == "Bug" or pokemon.type == "Plant" or pokemon.type == "Poison" or pokemon.type == "Flying" :
             k = 0.5
-        return pokemon.HP - k * degats
+        
+        degats_attenues = pokemon.sp_def - k * degats
+        if degats_attenues > 0 :
+            return pokemon.HP - degats_attenues
+        else : return pokemon.HP
     
     
 class Poison(Pokemon):
@@ -265,7 +312,11 @@ class Poison(Pokemon):
             k = 0.5
         elif pokemon.type == "Steel" :
             k = 0
-        return pokemon.HP - k * degats
+        
+        degats_attenues = pokemon.sp_def - k * degats
+        if degats_attenues > 0 :
+            return pokemon.HP - degats_attenues
+        else : return pokemon.HP
         
  
 class Psychic(Pokemon):
@@ -282,7 +333,11 @@ class Psychic(Pokemon):
             k = 2 
         elif pokemon.type == "Psychic" or pokemon.type == "Steel" :
             k = 0.5
-        return pokemon.HP - k * degats
+        
+        degats_attenues = pokemon.sp_def - k * degats
+        if degats_attenues > 0 :
+            return pokemon.HP - degats_attenues
+        else : return pokemon.HP
     
     
 class Rock(Pokemon):
@@ -299,7 +354,11 @@ class Rock(Pokemon):
             k = 2 
         elif pokemon.type == "Steel" or pokemon.type == "Fighting" or pokemon.type == "Ground" :
             k = 0.5
-        return pokemon.HP - k * degats
+        
+        degats_attenues = pokemon.sp_def - k * degats
+        if degats_attenues > 0 :
+            return pokemon.HP - degats_attenues
+        else : return pokemon.HP
     
     
 class Ground(Pokemon):
@@ -318,7 +377,11 @@ class Ground(Pokemon):
             k = 0.5
         elif pokemon.type == "Flying" :
             k = 0
-        return pokemon.HP - k * degats
+        
+        degats_attenues = pokemon.sp_def - k * degats
+        if degats_attenues > 0 :
+            return pokemon.HP - degats_attenues
+        else : return pokemon.HP
 
 
 class Ghost(Pokemon):
@@ -335,7 +398,11 @@ class Ghost(Pokemon):
             k = 2 
         elif pokemon.type == "Normal" :
             k = 0
-        return pokemon.HP - k * degats
+        
+        degats_attenues = pokemon.sp_def - k * degats
+        if degats_attenues > 0 :
+            return pokemon.HP - degats_attenues
+        else : return pokemon.HP
     
     
 class Flying(Pokemon):
@@ -352,7 +419,11 @@ class Flying(Pokemon):
             k = 2 
         elif pokemon.type == "Steel" or pokemon.type == "Electric" or pokemon.type == "Rock" :
             k = 0.5
-        return pokemon.HP - k * degats
+        
+        degats_attenues = pokemon.sp_def - k * degats
+        if degats_attenues > 0 :
+            return pokemon.HP - degats_attenues
+        else : return pokemon.HP
 
 
     
