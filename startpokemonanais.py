@@ -27,8 +27,25 @@ class Pokemon():
         self.legendary = legendary
          
     def attaque_norm(self, pokemon):
-        #vérifier le type du pokemon adverse quand même exemple normal nul face à ghost
-        pass
+        """
+        Attaque  de type normale commune à tous les pokemon.
+        ----------
+        pokemon : string
+            Pokemon adversaire lors d'un combat.
+
+        Returns
+        -------
+        int
+            Le nombre d'HP restant au pokemon ayant subi les dégâts.
+        """
+        
+        degats = self.attack
+        k = 1 #facteur multiplicatif
+        if pokemon.type == "Steel" or pokemon.type == "Rock" :
+            k = 0.5
+        elif pokemon.type == "Ghost" :
+            k = 0
+        return pokemon.HP - k * degats  
         
     @abstractmethod
     def attaque_spe(self, pokemon):
@@ -38,6 +55,8 @@ class Pokemon():
 ######################################################################################################
 ################################################TYPES#################################################
 ######################################################################################################
+
+"""Définitions des types et leurs attaques spéciales associées, avec leurs forces et faiblesses associées"""
  
 class Steel(Pokemon):
     
@@ -47,7 +66,7 @@ class Steel(Pokemon):
         
     def attaque_spe(self, pokemon):
         
-        degats = 10
+        degats = self.attack
         k = 1 #facteur multiplicatif
         if pokemon.type == "Fairy" or pokemon.type == "Rock" or pokemon.type == "Ice" :
             k = 2 
@@ -64,7 +83,7 @@ class Fighting(Pokemon):
         
     def attaque_spe(self, pokemon):
         
-        degats = 10
+        degats = self.attack
         k = 1 #facteur multiplicatif
         if pokemon.type == "Steel" or pokemon.type == "Rock" or pokemon.type == "Ice" or pokemon.type == "Normal" :
             k = 2 
@@ -81,7 +100,7 @@ class Dragon(Pokemon):
         
     def attaque_spe(self, pokemon):
         
-        degats = 10
+        degats = self.attack
         k = 1 #facteur multiplicatif
         if pokemon.type == "Dragon" :
             k = 2 
@@ -100,7 +119,7 @@ class Water(Pokemon):
         
     def attaque_spe(self, pokemon):
         
-        degats = 10
+        degats = self.attack
         k = 1 #facteur multiplicatif
         if pokemon.type == "Fire" or pokemon.type == "Rock" or pokemon.type == "Ground" :
             k = 2 
@@ -117,7 +136,7 @@ class Electric(Pokemon):
         
     def attaque_spe(self, pokemon):
         
-        degats = 10
+        degats = self.attack
         k = 1 #facteur multiplicatif
         if pokemon.type == "Water" or pokemon.type == "Flying" :
             k = 2 
@@ -136,7 +155,7 @@ class Fire(Pokemon):
         
     def attaque_spe(self, pokemon):
         
-        degats = 10
+        degats = self.attack
         k = 1 #facteur multiplicatif
         if pokemon.type == "Plant" or pokemon.type == "Steel" or pokemon.type == "Ice" or pokemon.type == "Bug" :
             k = 2 
@@ -153,7 +172,7 @@ class Fairy(Pokemon):
         
     def attaque_spe(self, pokemon):
         
-        degats = 10
+        degats = self.attack
         k = 1 #facteur multiplicatif
         if pokemon.type == "Fighting" or pokemon.type == "Dragon":
             k = 2 
@@ -170,7 +189,7 @@ class Ice(Pokemon):
         
     def attaque_spe(self, pokemon):
         
-        degats = 10
+        degats = self.attack
         k = 1 #facteur multiplicatif
         if pokemon.type == "Plant" or pokemon.type == "Dragon" or pokemon.type == "Ground" or pokemon.type == "Flying" :
             k = 2 
@@ -187,7 +206,7 @@ class Bug(Pokemon):
         
     def attaque_spe(self, pokemon):
         
-        degats = 10
+        degats = self.attack
         k = 1 #facteur multiplicatif
         if pokemon.type == "Plant" or pokemon.type == "Psychic" :
             k = 2 
@@ -204,7 +223,7 @@ class Normal(Pokemon):
         
     def attaque_spe(self, pokemon):
         
-        degats = 10
+        degats = self.attack
         k = 1 #facteur multiplicatif
         if pokemon.type == "Ghost" :
             k = 0 
@@ -221,7 +240,7 @@ class Plant(Pokemon):
         
     def attaque_spe(self, pokemon):
         
-        degats = 10
+        degats = self.attack
         k = 1 #facteur multiplicatif
         if pokemon.type == "Water" or pokemon.type == "Rock" or pokemon.type == "Ground" :
             k = 2 
@@ -238,7 +257,7 @@ class Poison(Pokemon):
         
     def attaque_spe(self, pokemon):
         
-        degats = 10
+        degats = self.attack
         k = 1 #facteur multiplicatif
         if pokemon.type == "Fairy" or pokemon.type == "Plant" :
             k = 2 
@@ -257,7 +276,7 @@ class Psychic(Pokemon):
         
     def attaque_spe(self, pokemon):
         
-        degats = 10
+        degats = self.attack
         k = 1 #facteur multiplicatif
         if pokemon.type == "Fighting" or pokemon.type == "Poison" :
             k = 2 
@@ -274,7 +293,7 @@ class Rock(Pokemon):
         
     def attaque_spe(self, pokemon):
         
-        degats = 10
+        degats = self.attack
         k = 1 #facteur multiplicatif
         if pokemon.type == "Fire" or pokemon.type == "Ice" or pokemon.type == "Bug" or pokemon.type == "Flying" :
             k = 2 
@@ -291,7 +310,7 @@ class Ground(Pokemon):
         
     def attaque_spe(self, pokemon):
         
-        degats = 10
+        degats = self.attack
         k = 1 #facteur multiplicatif
         if pokemon.type == "Fire" or pokemon.type == "Steel" or pokemon.type == "Electric" or pokemon.type == "Poison" or pokemon.type == "Rock":
             k = 2 
@@ -310,7 +329,7 @@ class Ghost(Pokemon):
         
     def attaque_spe(self, pokemon):
         
-        degats = 10
+        degats = self.attack
         k = 1 #facteur multiplicatif
         if pokemon.type == "Psychic" or pokemon.type == "Ghost" :
             k = 2 
@@ -327,7 +346,7 @@ class Flying(Pokemon):
         
     def attaque_spe(self, pokemon):
         
-        degats = 10
+        degats = self.attack
         k = 1 #facteur multiplicatif
         if pokemon.type == "Fighting" or pokemon.type == "Bug" or pokemon.type == "Plant" :
             k = 2 
@@ -364,4 +383,4 @@ class Generation1:
         return txt
         
              
-liste_pokemon = Generation1(r"C:\Users\anais\projetPokemon\data\pokemon_first_gen.csv")
+liste_pokemon = Generation1(r"data\pokemon_first_gen.csv")
