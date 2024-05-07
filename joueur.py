@@ -83,5 +83,6 @@ class joueur:
             
             if action == "Switch Pokemon":
                 print ("Pokemon in your team :")
-                print()
-            
+                for i in range(len(self.team)):
+                    print(self.team[i].nom)
+                print("Switch ")
