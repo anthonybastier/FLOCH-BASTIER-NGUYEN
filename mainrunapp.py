@@ -6,6 +6,8 @@ Created on Mon May  6 16:31:30 2024
 """
 
 from testbutton import *
+from joueur import *
+from startpokemonanais import *
 import sys
 from PyQt5.QtWidgets import QMainWindow, QApplication, QDialog
 
@@ -20,6 +22,13 @@ class Combat(QMainWindow, Ui_Form):
     def Chgt_pokemon(self):
         dlg = Choix(self)
         dlg.exec()
+        
+class Choix(QDialog):
+    
+    def __init__(self, parent = None):
+        super(Choix, self).__init__(parent)
+        self.ui = Ui_Dialog()
+        self.ui.setupUi(self)
         
         
 def run_app():
