@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>510</width>
-    <height>664</height>
+    <width>1022</width>
+    <height>1344</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,8 +18,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>511</width>
-     <height>321</height>
+     <width>1022</width>
+     <height>642</height>
     </rect>
    </property>
    <property name="text">
@@ -29,7 +29,7 @@
     <enum>Qt::RichText</enum>
    </property>
    <property name="pixmap">
-    <pixmap>FLOCH-BASTIER-NGUYEN/data/fond combat.jpg</pixmap>
+    <pixmap>data/fond combat.jpg</pixmap>
    </property>
    <property name="scaledContents">
     <bool>true</bool>
@@ -39,9 +39,9 @@
    <property name="geometry">
     <rect>
      <x>0</x>
-     <y>320</y>
-     <width>511</width>
-     <height>351</height>
+     <y>640</y>
+     <width>1022</width>
+     <height>702</height>
     </rect>
    </property>
    <property name="text">
@@ -51,7 +51,7 @@
     <enum>Qt::RichText</enum>
    </property>
    <property name="pixmap">
-    <pixmap>FLOCH-BASTIER-NGUYEN/data/buttons combat.jpg</pixmap>
+    <pixmap>data/buttons combat.jpg</pixmap>
    </property>
    <property name="scaledContents">
     <bool>true</bool>
@@ -60,10 +60,10 @@
   <widget class="QPushButton" name="Attack_Button">
    <property name="geometry">
     <rect>
-     <x>40</x>
-     <y>390</y>
-     <width>211</width>
-     <height>101</height>
+     <x>110</x>
+     <y>810</y>
+     <width>361</width>
+     <height>161</height>
     </rect>
    </property>
    <property name="font">
@@ -79,10 +79,10 @@
   <widget class="QPushButton" name="Spe_Attack_Button">
    <property name="geometry">
     <rect>
-     <x>270</x>
-     <y>390</y>
-     <width>211</width>
-     <height>101</height>
+     <x>570</x>
+     <y>810</y>
+     <width>361</width>
+     <height>161</height>
     </rect>
    </property>
    <property name="font">
@@ -98,10 +98,10 @@
   <widget class="QPushButton" name="Flee_Button">
    <property name="geometry">
     <rect>
-     <x>40</x>
-     <y>510</y>
-     <width>211</width>
-     <height>101</height>
+     <x>110</x>
+     <y>1040</y>
+     <width>361</width>
+     <height>161</height>
     </rect>
    </property>
    <property name="font">
@@ -117,10 +117,10 @@
   <widget class="QPushButton" name="Pokemon_Button">
    <property name="geometry">
     <rect>
-     <x>270</x>
-     <y>510</y>
-     <width>211</width>
-     <height>101</height>
+     <x>570</x>
+     <y>1040</y>
+     <width>361</width>
+     <height>161</height>
     </rect>
    </property>
    <property name="font">
