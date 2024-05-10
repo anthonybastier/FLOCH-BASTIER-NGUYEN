@@ -9,6 +9,14 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from joueur import *
+from pokemons import *
+import random as rd
+
+joueur = Joueur((0,0),6) #joueur en 0,0 avec 6 pokemon dans sa team
+pokemon1 = joueur.team[0]
+index = rd.randint(0,150)
+pokemon_adv = liste_pokemon[index]
 
 
 class Ui_Dialog(object):
@@ -36,6 +44,7 @@ class Ui_Dialog(object):
         font.setPointSize(14)
         self.Attack_Button.setFont(font)
         self.Attack_Button.setObjectName("Attack_Button")
+        self.Attack_Button.setStyleSheet("QPushButton { background-color: transparent; border: 0px }")
         self.Spe_Attack_Button = QtWidgets.QPushButton(Dialog)
         self.Spe_Attack_Button.setGeometry(QtCore.QRect(270, 390, 211, 101))
         font = QtGui.QFont()
@@ -43,6 +52,7 @@ class Ui_Dialog(object):
         font.setPointSize(14)
         self.Spe_Attack_Button.setFont(font)
         self.Spe_Attack_Button.setObjectName("Spe_Attack_Button")
+        self.Spe_Attack_Button.setStyleSheet("QPushButton { background-color: transparent; border: 0px }")
         self.Flee_Button = QtWidgets.QPushButton(Dialog)
         self.Flee_Button.setGeometry(QtCore.QRect(40, 510, 211, 101))
         font = QtGui.QFont()
@@ -50,6 +60,7 @@ class Ui_Dialog(object):
         font.setPointSize(14)
         self.Flee_Button.setFont(font)
         self.Flee_Button.setObjectName("Flee_Button")
+        self.Flee_Button.setStyleSheet("QPushButton { background-color: transparent; border: 0px }")
         self.Pokemon_Button = QtWidgets.QPushButton(Dialog)
         self.Pokemon_Button.setGeometry(QtCore.QRect(270, 510, 211, 101))
         font = QtGui.QFont()
@@ -57,6 +68,7 @@ class Ui_Dialog(object):
         font.setPointSize(14)
         self.Pokemon_Button.setFont(font)
         self.Pokemon_Button.setObjectName("Pokemon_Button")
+        self.Pokemon_Button.setStyleSheet("QPushButton { background-color: transparent; border: 0px }")
 
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
