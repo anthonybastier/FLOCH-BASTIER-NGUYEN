@@ -9,36 +9,28 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from joueur import *
-from pokemons import *
-import random as rd
-
-joueur = Joueur((0,0),6) #joueur en 0,0 avec 6 pokemon dans sa team
-pokemon1 = joueur.team[0]
-index = rd.randint(0,150)
-pokemon_adv = liste_pokemon[index]
 
 
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
-        Dialog.resize(510, 664)
+        Dialog.resize(1022, 1344)
         self.Fond_Combat_Dialogue = QtWidgets.QLabel(Dialog)
-        self.Fond_Combat_Dialogue.setGeometry(QtCore.QRect(0, 0, 511, 321))
+        self.Fond_Combat_Dialogue.setGeometry(QtCore.QRect(0, 0, 1022, 642))
         self.Fond_Combat_Dialogue.setText("")
         self.Fond_Combat_Dialogue.setTextFormat(QtCore.Qt.RichText)
-        self.Fond_Combat_Dialogue.setPixmap(QtGui.QPixmap("FLOCH-BASTIER-NGUYEN/data/fond combat.jpg"))
+        self.Fond_Combat_Dialogue.setPixmap(QtGui.QPixmap("data/fond combat.jpg"))
         self.Fond_Combat_Dialogue.setScaledContents(True)
         self.Fond_Combat_Dialogue.setObjectName("Fond_Combat_Dialogue")
         self.Fond_Combat_Button = QtWidgets.QLabel(Dialog)
-        self.Fond_Combat_Button.setGeometry(QtCore.QRect(0, 320, 511, 351))
+        self.Fond_Combat_Button.setGeometry(QtCore.QRect(0, 640, 1022, 702))
         self.Fond_Combat_Button.setText("")
         self.Fond_Combat_Button.setTextFormat(QtCore.Qt.RichText)
-        self.Fond_Combat_Button.setPixmap(QtGui.QPixmap("FLOCH-BASTIER-NGUYEN/data/buttons combat.jpg"))
+        self.Fond_Combat_Button.setPixmap(QtGui.QPixmap("data/buttons combat.jpg"))
         self.Fond_Combat_Button.setScaledContents(True)
         self.Fond_Combat_Button.setObjectName("Fond_Combat_Button")
         self.Attack_Button = QtWidgets.QPushButton(Dialog)
-        self.Attack_Button.setGeometry(QtCore.QRect(40, 390, 211, 101))
+        self.Attack_Button.setGeometry(QtCore.QRect(110, 810, 361, 161))
         font = QtGui.QFont()
         font.setFamily("Terminal")
         font.setPointSize(14)
@@ -46,7 +38,7 @@ class Ui_Dialog(object):
         self.Attack_Button.setObjectName("Attack_Button")
         self.Attack_Button.setStyleSheet("QPushButton { background-color: transparent; border: 0px }")
         self.Spe_Attack_Button = QtWidgets.QPushButton(Dialog)
-        self.Spe_Attack_Button.setGeometry(QtCore.QRect(270, 390, 211, 101))
+        self.Spe_Attack_Button.setGeometry(QtCore.QRect(570, 810, 361, 161))
         font = QtGui.QFont()
         font.setFamily("Terminal")
         font.setPointSize(14)
@@ -54,7 +46,7 @@ class Ui_Dialog(object):
         self.Spe_Attack_Button.setObjectName("Spe_Attack_Button")
         self.Spe_Attack_Button.setStyleSheet("QPushButton { background-color: transparent; border: 0px }")
         self.Flee_Button = QtWidgets.QPushButton(Dialog)
-        self.Flee_Button.setGeometry(QtCore.QRect(40, 510, 211, 101))
+        self.Flee_Button.setGeometry(QtCore.QRect(110, 1040, 361, 161))
         font = QtGui.QFont()
         font.setFamily("Terminal")
         font.setPointSize(14)
@@ -62,7 +54,7 @@ class Ui_Dialog(object):
         self.Flee_Button.setObjectName("Flee_Button")
         self.Flee_Button.setStyleSheet("QPushButton { background-color: transparent; border: 0px }")
         self.Pokemon_Button = QtWidgets.QPushButton(Dialog)
-        self.Pokemon_Button.setGeometry(QtCore.QRect(270, 510, 211, 101))
+        self.Pokemon_Button.setGeometry(QtCore.QRect(570, 1040, 361, 161))
         font = QtGui.QFont()
         font.setFamily("Terminal")
         font.setPointSize(14)
