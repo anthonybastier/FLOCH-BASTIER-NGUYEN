@@ -6,7 +6,7 @@ Created on Fri May  3 11:28:31 2024
 """
 
 #Import des Pokemons
-from startpokemonanais import liste_pokemon
+from pokemons import liste_pokemon
 
 #Import des modules 
 import random as rd
