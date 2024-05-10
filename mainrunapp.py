@@ -7,9 +7,10 @@ Created on Mon May  6 16:31:30 2024
 
 from testbutton import *
 from joueur import *
-from startpokemonanais import *
+from pokemons import *
 import sys
 from PyQt5.QtWidgets import QMainWindow, QApplication, QDialog
+
 
 
 class Combat(QMainWindow, Ui_Form):
@@ -17,11 +18,24 @@ class Combat(QMainWindow, Ui_Form):
     def __init__(self, parent = None):
         super(Combat, self).__init__(parent)
         self.setupUi(self)
-        self.Button_attack.clicked.connect(self.Chgt_pokemon)
+        self.Button_Pokemon.clicked.connect(self.Chgt_pokemon)
+        self.Button_attack.clicked.connect(self.attack_norm)
+        self.Button_attack_spe.clicked.connect(self.attack_spe)
+        self.Button_flee.clicked.connect(self.flee)
         
     def Chgt_pokemon(self):
         dlg = Choix(self)
         dlg.exec()
+        
+    def attack_norm(self, pokemon):
+        pass
+    
+    def attack_spe(self,pokemon):
+        pass
+    
+    def flee(self):
+        pass
+        
         
 class Choix(QDialog):
     

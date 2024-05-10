@@ -11,7 +11,7 @@ from startpokemonanais import liste_pokemon
 #Import des modules 
 import random as rd
 
-class joueur:
+class Joueur:
     def __init__(self, position = (0,0), nb_pokemon = 1):
         """
         Initialise le joueur, avec au moins un pokémon choisi aléatoirement

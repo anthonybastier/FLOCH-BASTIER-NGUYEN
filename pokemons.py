@@ -80,7 +80,6 @@ class Pokemon():
 class Generation1:
     
     "Permet d'obtenir la liste de tous les pokemon en les définissant comme tels avec leurs valeurs attribuées"
-    #liste_pokemon = Generation1(r"C:\Users\anais\projetPokemon\data\pokemon_first_gen.csv")
     
     def __init__(self, nomfichier):
         self.liste = []

@@ -9,7 +9,11 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from joueur import *
+from pokemons import *
 
+pokemon1 = Joueur.team[0]
+#pokemon_adv = 
 
 class Ui_Form(object):
     def setupUi(self, Form):
