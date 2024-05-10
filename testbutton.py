@@ -19,7 +19,7 @@ class Ui_Form(object):
         self.label.setGeometry(QtCore.QRect(0, 0, 1471, 1105))
         self.label.setText("")
         self.label.setTextFormat(QtCore.Qt.RichText)
-        self.label.setPixmap(QtGui.QPixmap("Downloads/boutons actions.jpg"))
+        self.label.setPixmap(QtGui.QPixmap("boutons actions.jpg"))
         self.label.setScaledContents(True)
         self.label.setObjectName("label")
         self.Button_attack = QtWidgets.QPushButton(Form)
