@@ -11,9 +11,12 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from joueur import *
 from pokemons import *
+import random as rd
 
-pokemon1 = Joueur.team[0]
-#pokemon_adv = 
+joueur = Joueur((0,0),6) #joueur en 0,0 avec 6 pokemon dans sa team
+pokemon1 = joueur.team[0]
+index = rd.randint(0,150)
+pokemon_adv = liste_pokemon[index]
 
 class Ui_Form(object):
     def setupUi(self, Form):
