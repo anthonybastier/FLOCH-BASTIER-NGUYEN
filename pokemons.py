@@ -41,15 +41,21 @@ class Pokemon():
         """
         
         degats = self.attack
-        k = 1 #facteur multiplicatif
+        k = 1 #facteur multiplicatif pour le type 1
+        l = 1 #facteur multiplicatif pour le type 2
         if pokemon.type == "Steel" or pokemon.type == "Rock" :
             k = 0.5
         elif pokemon.type == "Ghost" :
             k = 0
-        degats_attenues = pokemon.defense - k * degats
+        if pokemon.type2 == "Steel" or pokemon.type2 == "Rock" :
+            l = 0.5
+        elif pokemon.type2 == "Ghost" :
+            l = 0
+        degats_attenues = pokemon.defense - k*l * degats
         if degats_attenues > 0 :
             return pokemon.HP - degats_attenues
-        else : return pokemon.HP
+        else : 
+            return pokemon.HP
         
         
     def attaque_spe(self, pokemon):
@@ -66,14 +72,17 @@ class Pokemon():
         """
         
         degats = self.sp_atk
-        k = 1 #facteur multiplicatif
+        k = 1 #facteur multiplicatif pour le type 1
+        l = 1 #facteur multiplicatif pour le type 2
         types = pd.read_csv("data\types.csv", index_col=0)
-        k = types.loc[self.type, pokemon.type] #Trouve le facteur k correspondant aux types
-
-        degats_attenues = pokemon.sp_def - k * degats
+        k = types.loc[self.type, pokemon.type] #Trouve le facteur correspondant aux types dans le tableau des affinités
+        if pokemon.type2 != "":
+            l = types.loc[self.type, pokemon.type2] #De même avec le second type
+        degats_attenues = pokemon.sp_def - k*l * degats
         if degats_attenues > 0 :
             return pokemon.HP - degats_attenues
-        else : return pokemon.HP
+        else : 
+            return pokemon.HP
     
     
 ######################################################################################################    
@@ -104,8 +113,3 @@ class Generation1:
         
              
 liste_pokemon = Generation1(r"data\pokemon_first_gen.csv")
-
-print(liste_pokemon[0].nom)
-print(liste_pokemon[0].type)
-print(liste_pokemon[0].type2)
-print(liste_pokemon[10].type2)
