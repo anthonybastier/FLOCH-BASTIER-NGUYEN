@@ -13,10 +13,11 @@ import pandas as pd
 class Pokemon():
     
     
-    def __init__(self, id, nom, type, HP, attack, defense, sp_atk, sp_def, speed, position, legendary = False):
+    def __init__(self, id, nom, type, type2, HP, attack, defense, sp_atk, sp_def, speed, position, legendary = False):
         self.id = id
         self.nom = nom
         self.type = type
+        self.type2 = type2
         self.HP = int(HP)
         self.attack = attack
         self.defense = defense
@@ -88,8 +89,8 @@ class Generation1:
             next(csvFile)
             
             for row in csvFile: #faire correspondre les colonnes du csv aux caractéristiques de la classe pour chaque pokemon
-                a, b, c, d, e, f, g, h, i, j = (int(row[0]), str(row[1]), str(row[2]), int(row[5]), int(row[6]), int(row[7]), int(row[8]), int(row[9]), int(row[10]), bool(row[12]))
-                creature = Pokemon(a, b, c, d, e, f, g, h, i, j)
+                a, b, c, d, e, f, g, h, i, j, k = (int(row[0]), str(row[1]), str(row[2]),str(row[3]), int(row[5]), int(row[6]), int(row[7]), int(row[8]), int(row[9]), int(row[10]), bool(row[12]))
+                creature = Pokemon(a, b, c, d, e, f, g, h, i, j, k)
                 self.liste.append(creature)
     
     def __getitem__(self, ind):
@@ -103,3 +104,8 @@ class Generation1:
         
              
 liste_pokemon = Generation1(r"data\pokemon_first_gen.csv")
+
+print(liste_pokemon[0].nom)
+print(liste_pokemon[0].type)
+print(liste_pokemon[0].type2)
+print(liste_pokemon[10].type2)
