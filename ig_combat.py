@@ -9,6 +9,13 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from joueur import *
+from pokemons import *
+
+joueur = Joueur((0,0),6) #joueur en 0,0 avec 6 pokemon dans sa team
+pokemon1 = joueur.team[0]
+index = rd.randint(0,150)
+pokemon_adv = liste_pokemon[index] #pokemon_adv.nom renvoie son nom dcp
 
 
 class Ui_Dialog(object):
@@ -82,6 +89,7 @@ class Ui_Dialog(object):
         font.setPointSize(14)
         self.Nom_pokemon_adv.setFont(font)
         self.Nom_pokemon_adv.setObjectName("Nom_pokemon_adv")
+        self.Nom_pokemon_adv.setStyleSheet("QLineEdit { background-color: transparent; border: 0px }")
         self.Nom_pokemon_team = QtWidgets.QLineEdit(Dialog)
         self.Nom_pokemon_team.setGeometry(QtCore.QRect(610, 390, 181, 51))
         font = QtGui.QFont()
@@ -89,6 +97,7 @@ class Ui_Dialog(object):
         font.setPointSize(14)
         self.Nom_pokemon_team.setFont(font)
         self.Nom_pokemon_team.setObjectName("Nom_pokemon_team")
+        self.Nom_pokemon_team.setStyleSheet("QLineEdit { background-color: transparent; border: 0px }")
         self.HP_adv = QtWidgets.QLineEdit(Dialog)
         self.HP_adv.setGeometry(QtCore.QRect(230, 90, 181, 51))
         font = QtGui.QFont()
@@ -96,6 +105,7 @@ class Ui_Dialog(object):
         font.setPointSize(14)
         self.HP_adv.setFont(font)
         self.HP_adv.setObjectName("HP_adv")
+        self.HP_adv.setStyleSheet("QLineEdit { background-color: transparent; border: 0px }")
         self.HP_pokemon_team = QtWidgets.QLineEdit(Dialog)
         self.HP_pokemon_team.setGeometry(QtCore.QRect(830, 410, 181, 51))
         font = QtGui.QFont()
@@ -103,6 +113,7 @@ class Ui_Dialog(object):
         font.setPointSize(14)
         self.HP_pokemon_team.setFont(font)
         self.HP_pokemon_team.setObjectName("HP_pokemon_team")
+        self.HP_pokemon_team.setStyleSheet("QLineEdit { background-color: transparent; border: 0px }")
 
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
