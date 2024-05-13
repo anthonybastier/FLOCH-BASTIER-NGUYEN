@@ -8,11 +8,32 @@ Created on Mon May  6 16:31:30 2024
 from testbutton import *
 from joueur import *
 from pokemons import *
+from map_tomata import *
 import sys
 from PyQt5.QtWidgets import QMainWindow, QApplication, QDialog
+from PyQt5.QtCore import Qt
 
-
-
+class Overworld(QMainWindow):
+    def __init__(self):
+        QMainWindow.__init__(self)
+        self.setEnabled(True)
+    
+    def keyReleaseEvent(self,event):
+        if event.key()==Qt.Key_Up:
+            self.carte.move("up")
+        if event.key()==Qt.Key_Down:
+            self.carte.move("down")        
+        if event.key()==Qt.Key_Left:
+            self.carte.move("left")        
+        if event.key()==Qt.Key_Right:
+            self.carte.move("right")
+    
+    def setupUI(self):
+        self.resize(500,500)
+        self.setWindowTitle("Pookemon")
+        self.carte=Carte(self)
+            
+            
 class Combat(QMainWindow, Ui_Form):
     
     def __init__(self, parent = None):
@@ -47,7 +68,8 @@ class Choix(QDialog):
         
 def run_app():
     app = QApplication(sys.argv)
-    mainWin = Combat()
+    mainWin = Overworld()
+    mainWin.setupUI()
     mainWin.show()
     app.exec_()
     
