@@ -89,7 +89,7 @@ class Pokemon():
     
 class Generation1:
     
-    "Permet d'obtenir la liste de tous les pokemon en les définissant comme tels avec leurs valeurs attribuées"
+    "Permet d'obtenir la liste de tous les Pokemons en les définissant comme tels avec leurs valeurs attribuées"
     
     def __init__(self, nomfichier):
         self.liste = []
@@ -113,3 +113,31 @@ class Generation1:
         
              
 liste_pokemon = Generation1(r"data\pokemon_first_gen.csv")
+
+class Entites:
+    
+    "Permet d'obtenir la liste des Pokemons positionnés sur la carte"
+    
+    def __init__(self, nomfichier, liste_pokemon):
+        self.liste = []
+        with open(nomfichier, encoding='utf-8', mode ='r') as file:
+            csvFile = csv.reader(file)
+            next(csvFile)
+            
+            for row in csvFile:
+                nom, pos = (str(row[0]), (row[1][0],row[1][1]))
+                creature = next((pokemon for pokemon in liste_pokemon if pokemon.nom == nom), None)
+
+                creature.position = pos
+                self.liste.append(creature)
+                
+    def __getitem__(self, ind):
+        return self.liste[ind]
+                
+    def __str__(self):
+        txt = ""
+        for i in range(998) : 
+            txt += str(self.liste[i].nom) + "\n"
+        return txt
+
+liste_entites = Entites(r"data\pokemon_coordinates.csv",liste_pokemon)
