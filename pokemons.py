@@ -99,7 +99,8 @@ class Generation1:
             
             for row in csvFile: #faire correspondre les colonnes du csv aux caractéristiques de la classe pour chaque pokemon
                 a, b, c, d, e, f, g, h, i, j, k = (int(row[0]), str(row[1]), str(row[2]),str(row[3]), int(row[5]), int(row[6]), int(row[7]), int(row[8]), int(row[9]), int(row[10]), bool(row[12]))
-                creature = Pokemon(a, b, c, d, e, f, g, h, i, j, k)
+                print(int(row[10]))
+                creature = Pokemon(a, b, c, d, e, f, g, h, i, j, (0,0), k)
                 self.liste.append(creature)
     
     def __getitem__(self, ind):
