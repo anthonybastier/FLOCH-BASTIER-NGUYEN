@@ -48,14 +48,30 @@ class Combat(QMainWindow, Ui_Form):
         dlg = Choix(self)
         dlg.exec()
         
-    def attack_norm(self, pokemon):
-        pass
+    def attack_norm(self, pokemon_actuel, joueur):
+        pokemon_actuel = joueur.team[0]
+        
+        #Quel Pokémon agit en premier
+        v1 = pokemon_actuel.speed
+        v2 = pokemon_adv.speed
+        if v1 > v2 :
+            hp_adv = pokemon_actuel.attaque_norm(pokemon_adv)
+        
+        if hp_adv < 0:
+            #Combat gagné
+            print("Vous attrapez " + pokemon_adv.nom)
+            liste_entites.pop(pokemon_adv)
+            self.close()
+        else:
+            pass
     
     def attack_spe(self,pokemon):
         pass
     
     def flee(self):
-        pass
+        print("Ran away safely !")
+        self.close()
+       
         
         
 class Choix(QDialog):
