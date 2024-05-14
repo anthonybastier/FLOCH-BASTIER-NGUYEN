@@ -7,6 +7,7 @@ Created on Fri May  3 10:23:44 2024
 
 import csv
 import pandas as pd
+import copy
 
 ######################################################################################################
 
@@ -125,9 +126,11 @@ class Entites:
             next(csvFile)
             
             for row in csvFile:
-                nom, pos = (str(row[0]), (row[1][0],row[1][1]))
-                creature = next((pokemon for pokemon in liste_pokemon if pokemon.nom == nom), None)
-
+                nom, position_string = row[0], row[1]  # Extraire le nom et la position
+                pos = tuple(map(float, position_string.replace("[", "").replace("]", "").split(", ")))
+                
+                #Copie des caractéristiques du Pokémon, pour ensuite ajouter sa position
+                creature = copy.copy(next((pokemon for pokemon in liste_pokemon if pokemon.nom == nom), None))
                 creature.position = pos
                 self.liste.append(creature)
                 
