@@ -10,6 +10,7 @@ from pokemons import *
 
 #Import des modules 
 import random as rd
+import copy
 
 class Joueur:
     def __init__(self, position = (0,0)):
@@ -27,7 +28,7 @@ class Joueur:
         """
         
         self.position = position
-        self.team = [liste_pokemon[0],liste_pokemon[3],liste_pokemon[6]]
+        self.team = [copy.copy(liste_pokemon[0]),copy.copy(liste_pokemon[3]),copy.copy(liste_pokemon[6])]
     
     def a_un_pokemon_non_ko(self):
         """
@@ -52,6 +53,6 @@ class Joueur:
 
         for pokemon in self.team:
             # Récupérer le HP max du Pokémon
-            HP_max = liste_entitespokemon.HP_max
+            HP_max = liste_pokemon[pokemon.id-1].HP
             # Soigner le Pokémon
             pokemon.HP = HP_max
