@@ -151,7 +151,23 @@ class Entites:
                 
     def __getitem__(self, ind):
         return self.liste[ind]
-                
+    
+    def remove_pokemon(self, pos):
+        """
+        Supprime un Pokémon de la liste des entités à partir de sa position 
+        sur la carte.
+
+        Parameters
+        ----------
+        position : (tuple)
+            La position du Pokémon à supprimer.
+
+        """
+
+        for i in range(len(self.liste)):
+            if self.liste[i].position == pos:
+                self.liste.pop(i)         
+    
     def __str__(self):
         txt = ""
         for i in range(998) : 
