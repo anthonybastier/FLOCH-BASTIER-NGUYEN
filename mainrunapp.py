@@ -5,7 +5,7 @@ Created on Mon May  6 16:31:30 2024
 @author: anais
 """
 
-from testbutton import *
+from ig_combat import *
 from joueur import *
 from pokemons import *
 from map_tomata import *
