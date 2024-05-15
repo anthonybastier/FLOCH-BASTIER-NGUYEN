@@ -36,6 +36,22 @@ class Joueur:
             index = rd.randint(0,150) #Parmi les 151 pokemons
             self.team.append(liste_pokemon[index])
     
+    def a_un_pokemon_non_ko(self):
+        """
+        Vérifie si au moins un Pokémon du joueur n'est pas KO.
+
+        Returns
+        -------
+        bool
+            True si au moins un Pokémon est non KO, False sinon.
+        """
+
+        for pokemon in self.team:
+            if pokemon.HP != 0:
+                return True
+        return False
+    
+    
     def combat(self, pokemon_adv):
         """
         Un combat se joue au "tour par tour" : un pokémon effectue une action, 
