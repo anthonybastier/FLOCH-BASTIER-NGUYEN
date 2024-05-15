@@ -6,23 +6,20 @@ Created on Fri May  3 11:28:31 2024
 """
 
 #Import des Pokemons
-from pokemons import liste_pokemon
+from pokemons import *
 
 #Import des modules 
 import random as rd
 
 class Joueur:
-    def __init__(self, position = (0,0), nb_pokemon = 1):
+    def __init__(self, position = (0,0)):
         """
-        Initialise le joueur, avec au moins un pokémon choisi aléatoirement
+        Initialise le joueur, avec les trois starters de la 1ere génération.
 
         Parameters
         ----------
         position : tuple, optional
             Position de départ du personnage. Par défaut à (0,0).
-        nb_pokemon : int
-            Nombre de pokemons possédés au départ du jeu. Par défaut à 1.
-
         Returns
         -------
         None.
@@ -30,11 +27,7 @@ class Joueur:
         """
         
         self.position = position
-        self.team = [] #Liste des pokemons de départ
-        
-        for i in range(nb_pokemon):
-            index = rd.randint(0,150) #Parmi les 151 pokemons
-            self.team.append(liste_pokemon[index])
+        self.team = [liste_pokemon[0],liste_pokemon[3],liste_pokemon[6]]
     
     def a_un_pokemon_non_ko(self):
         """
@@ -51,3 +44,14 @@ class Joueur:
                 return True
         return False
 
+    def soigner_equipe(self):
+        """
+        Soigne tous les Pokémons du joueur.
+        
+        """
+
+        for pokemon in self.team:
+            # Récupérer le HP max du Pokémon
+            HP_max = liste_entitespokemon.HP_max
+            # Soigner le Pokémon
+            pokemon.HP = HP_max
