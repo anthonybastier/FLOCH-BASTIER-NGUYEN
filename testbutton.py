@@ -13,7 +13,7 @@ from joueur import *
 from pokemons import *
 import random as rd
 
-joueur = Joueur((0,0),6) #joueur en 0,0 avec 6 pokemon dans sa team
+joueur = Joueur((0,0)) #joueur en 0,0
 pokemon1 = joueur.team[0]
 index = rd.randint(0,150)
 pokemon_adv = liste_pokemon[index]

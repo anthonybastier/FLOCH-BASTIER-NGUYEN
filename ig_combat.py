@@ -12,7 +12,7 @@ from pokemons import *
 
 ####### Définition des protagonistes #######
 
-joueur = Joueur((0,0),6) #joueur en 0,0 avec 6 pokemon dans sa team
+joueur = Joueur((0,0)) #joueur en 0,0
 pokemon_team = joueur.team[0]
 pokemon_team_HP_init = pokemon_team.HP
 index = rd.randint(0,150)
