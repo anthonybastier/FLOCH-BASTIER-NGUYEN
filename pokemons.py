@@ -7,6 +7,7 @@ Created on Fri May  3 10:23:44 2024
 
 import csv
 import pandas as pd
+import random as rd
 import copy
 
 ######################################################################################################
@@ -84,6 +85,20 @@ class Pokemon():
             return pokemon.HP - degats_attenues
         else : 
             return pokemon.HP
+        
+    
+    def choix_attaque(self):
+        """
+        Renvoie un choix aléatoire d'attaque ; utilisé pour les Pokémons adverses.
+
+        Returns
+        -------
+        function
+            Attaque aléatoire parmi attaque normale et attaque spéciale.
+
+        """
+        attaques = [self.attaque_norm, self.attaque_spe]
+        return rd.choice(attaques)
     
     
 ######################################################################################################    
