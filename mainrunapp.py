@@ -39,31 +39,37 @@ class Combat(QMainWindow, Ui_Form):
     def __init__(self, parent = None):
         super(Combat, self).__init__(parent)
         self.setupUi(self)
-        self.Button_Pokemon.clicked.connect(self.Chgt_pokemon)
+        self.Button_Pokemon.clicked.connect(self.chgt_pokemon)
         self.Button_attack.clicked.connect(self.attack_norm)
         self.Button_attack_spe.clicked.connect(self.attack_spe)
         self.Button_flee.clicked.connect(self.flee)
         
-    def Chgt_pokemon(self):
+    def chgt_pokemon(self):
         dlg = Choix(self)
         dlg.exec()
         
-    def attack_norm(self, pokemon_actuel, joueur):
+    def attack_norm(self, pokemon_adv, joueur):
         pokemon_actuel = joueur.team[0]
         
         #Quel Pokémon agit en premier
         v1 = pokemon_actuel.speed
         v2 = pokemon_adv.speed
         if v1 > v2 :
-            hp_adv = pokemon_actuel.attaque_norm(pokemon_adv)
+            hp_p2 = pokemon_actuel.attaque_norm(pokemon_adv)
         
-        if hp_adv < 0:
-            #Combat gagné
-            print("Vous attrapez " + pokemon_adv.nom)
-            liste_entites.pop(pokemon_adv)
-            self.close()
-        else:
-            pass
+            if hp_p2 <= 0:
+                #Combat gagné
+                print("Vous attrapez " + pokemon_adv.nom)
+                liste_entites.pop(pokemon_adv)
+                self.close()
+            else:
+                hp_p1 = pokemon_adv.attaque_norm(pokemon_actuel)
+                
+                if hp_p1 <= 0:
+                    if joueur.a_un_pokemon_non_ko():
+                        self.chgt_pokemon()
+                        
+        
     
     def attack_spe(self,pokemon):
         pass
