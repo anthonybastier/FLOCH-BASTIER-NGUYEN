@@ -9,14 +9,10 @@ import numpy as np
 from PyQt5 import QtCore
 from PyQt5 import QtWidgets
 from PyQt5 import QtGui
-
-
-class Joueur():
-    def __init__(self):
-        self.position=[0,0]
+from joueur import *
         
-        
-joueur=Joueur()
+joueur=Joueur((0,0))
+
 class Carte():
     def __init__(self,mainWindow):
         self.carte=QtWidgets.QLabel(mainWindow)
