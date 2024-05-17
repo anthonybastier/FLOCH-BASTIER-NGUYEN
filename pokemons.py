@@ -1,21 +1,53 @@
 # -*- coding: utf-8 -*-
 """
-Created on Fri May  3 10:23:44 2024
-
-@author: anais
+@authors: Anais, Anthony, Thomas
 """
-
+####### Imports #######
 import csv
 import pandas as pd
 import random as rd
 import copy
 import numpy as np
-######################################################################################################
+
+####### Définition de la classe Pokémon #######
 
 class Pokemon():
     
-    
     def __init__(self, id, nom, type, type2, HP, attack, defense, sp_atk, sp_def, speed, position,legendary = False, rencontre=False):
+        """
+        Initialise un Pokémon avec toutes ses caractéristiques, dont la 
+        position et s'il a été rencontré ou non.
+
+        Parameters
+        ----------
+        id : int
+            Identifiant du Pokémon, de 1 à 151.
+        nom : str
+            Nom du Pokémon
+        type : str
+            Premier type du Pokémon.
+        type2 : str
+            Second type du Pokémon, s'il en possède un.
+        HP : float
+            Points de vie du Pokémon.
+        attack : int
+            Points d'attaque du Pokémon.
+        defense : int
+            Points de défense du Pokémon.
+        sp_atk : int
+            Points d'attaque spéciale du Pokémon.
+        sp_def : int
+            Points de défense spéciale du Pokémon.
+        speed : int
+            Vitesse du Pokémon.
+        position : tuple
+            Position x,y des Pokémons. Elle ne changera pas au cours du jeu.
+        legendary : bool, optional
+            Indique si le Pokémon est légendaire ou non. Par défaut à False.
+        rencontre : bool, optional
+            Indique si le Pokémon a déjà été capturé. Par défault à False.
+
+        """
         self.id = id
         self.nom = nom
         self.type = type
@@ -32,15 +64,18 @@ class Pokemon():
          
     def attaque_norm(self, pokemon):
         """
-        Attaque  de type normale commune à tous les pokemon.
+        Attaque de type normale commune à tous les Pokémons.Vérifie les 
+        Pokémons pour lesquels les dégats sont attenués, en fonction de leurs 
+        type principal et secondaire, à l'aide des facteurs k et l.
         ----------
-        pokemon : string
-            Pokemon adversaire lors d'un combat.
+        pokemon : str
+            Pokémon adversaire lors d'un combat.
 
         Returns
         -------
         int
-            Le nombre d'HP restant au pokemon ayant subi les dégâts.
+            Le nombre d'HP restant au pokemon ayant subi les dégâts, 
+            calculé avec ses statistiques et ses HP max.
         """
         
         degats = self.attack
@@ -63,15 +98,18 @@ class Pokemon():
         
     def attaque_spe(self, pokemon):
         """
-        Attaque spéciale propre au type du pokemon.
+        Attaque spéciale propre au type du Pokémon. Regarde dans le tableau csv
+        des types Pokémons les correspondances entre le type de l'attaque et 
+        les types des Pokémons attaqués.
         ----------
-        pokemon : string
-            Pokemon adversaire lors d'un combat.
+        pokemon : str
+            Pokémon adversaire lors d'un combat.
 
         Returns
         -------
         int
-            Le nombre d'HP restant au pokemon ayant subi les dégâts.
+            Le nombre d'HP restant au Pokémon ayant subi les dégâts, 
+            calculé avec ses statistiques et ses HP max.
         """
         
         degats = self.sp_atk
@@ -90,7 +128,8 @@ class Pokemon():
     
     def choix_attaque(self):
         """
-        Renvoie un choix aléatoire d'attaque ; utilisé par les Pokémons adverses sur le Pokémon du joueur.
+        Renvoie un choix aléatoire d'attaque ; utilisé par les Pokémons 
+        adverses sur le Pokémon du joueur.
 
         Returns
         -------
@@ -101,14 +140,23 @@ class Pokemon():
         attaques = [self.attaque_norm, self.attaque_spe]
         return rd.choice(attaques)
     
-    
-######################################################################################################    
+
+####### Définition des listes de Pokémons #######
     
 class Generation1:
     
-    "Permet d'obtenir la liste de tous les Pokemons en les définissant comme tels avec leurs valeurs attribuées"
-    
     def __init__(self, nomfichier):
+        """
+        Permet d'obtenir la liste de tous les Pokemons de la première génération
+        en les définissant comme tels avec leurs valeurs attribuées. La position 
+        des Pokémons est initialisée à (0,0).
+        
+        Parameters
+        ----------
+        nomfichier : str
+            Fichier contenant la liste de tous les Pokémons de la 1ère génération.
+
+        """
         self.liste = []
         with open(nomfichier, encoding='utf-8', mode ='r') as file: #utf-8 permet de différencier Nidoran mâle et femelle
             csvFile = csv.reader(file)
@@ -120,9 +168,34 @@ class Generation1:
                 self.liste.append(creature)
     
     def __getitem__(self, ind):
+        """
+        Surcharge de méthode ; permet de récupérer le i-ème pokémon de la 
+        1ère génération.
+
+        Parameters
+        ----------
+        ind : int
+            Identifiant du Pokémon de 1 à 151.
+
+        Returns
+        -------
+        Pokemon
+            Pokémon correspondant de type "Pokemon"
+
+        """
         return self.liste[ind]
     
     def __str__(self):
+        """
+        Surcharge de méthode ; permet d'afficher la liste des 151 Pokémons de 
+        la 1ère génération.
+
+        Returns
+        -------
+        txt : str
+            Chaine de caractères contenant l'ensemble des Pokémons.
+
+        """
         txt = ""
         for i in range(151) : 
             txt += str(self.liste[i].nom) + "\n"
@@ -133,9 +206,20 @@ liste_pokemon = Generation1(r"data\pokemon_first_gen.csv")
 
 class Entites:
     
-    "Permet d'obtenir la liste des Pokemons positionnés sur la carte"
-    
     def __init__(self, nomfichier, liste_pokemon):
+        """
+        Permet d'obtenir la liste des Pokemons positionnés sur la carte. Utilise
+        la liste des Pokémons de la première génération pour obtenir leurs 
+        attributs puis ajoute la position.
+
+        Parameters
+        ----------
+        nomfichier : str
+            Nom du fichier contenant les noms des Pokémons ainsi que leur position.
+        liste_pokemon : Generation1
+            Liste des 151 Pokémons avec leurs attributs.
+
+        """
         self.liste = []
         with open(nomfichier, encoding='utf-8', mode ='r') as file:
             csvFile = csv.reader(file)
@@ -151,6 +235,21 @@ class Entites:
                 self.liste.append(creature)
                 
     def __getitem__(self, ind):
+        """
+        Surcharge de méthode ; permet de récupérer le i-ème pokémon de la 
+        liste des Pokémons présents sur la carte.
+
+        Parameters
+        ----------
+        ind : int
+            Identifiant du Pokémon de 0 à 997.
+
+        Returns
+        -------
+        Pokemon
+            Pokémon correspondant de type "Pokemon"
+
+        """
         return self.liste[ind]
     
     def remove_pokemon(self, pos):
@@ -170,6 +269,16 @@ class Entites:
                 self.liste.pop(i)         
     
     def __str__(self):
+        """
+        Surcharge de méthode ; permet d'afficher la liste des Pokémons présents
+        sur la carte.
+
+        Returns
+        -------
+        txt : str
+            Chaine de caractères contenant l'ensemble des Pokémons.
+
+        """
         txt = ""
         for i in range(998) : 
             txt += str(self.liste[i].nom) + "\n"
@@ -178,10 +287,12 @@ class Entites:
 liste_entites = Entites(r"data\pokemon_coordinates.csv",liste_pokemon)
 
 
-
-### Construction de la matrice de collision par projection des positions des pokemons sur une grille 40x40
-
-matrice_collision=[[[]for i in range(40)]for j in range(40)]
+####### Construction de la matrice de collision #######
+"""
+On construit la matrice de collision du jeu par projection des positions des 
+Pokémons sur une grille 40x40.
+"""
+matrice_collision=[[[]for i in range(40)]for j in range(40)] 
 liste_pos=[]
 for i in liste_entites:
     liste_pos.append(i.position)
