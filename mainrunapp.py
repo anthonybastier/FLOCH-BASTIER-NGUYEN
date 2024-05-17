@@ -51,7 +51,7 @@ class Combat(QMainWindow, Ui_Dialog):
         self.HP_init_adv = self.pokemon_adv.HP
         
         self.setupUi(self)
-        self.Pokemon_Button.clicked.connect(lambda: self.chgt_pokemon(self.pokemon_adv, joueur))
+        self.Pokemon_Button.clicked.connect(lambda: self.chgt_pokemon(joueur))
         self.Attack_Button.clicked.connect(lambda: self.attack(joueur, "normal attack"))
         self.Spe_Attack_Button.clicked.connect(lambda: self.attack(joueur, "special attack"))
         self.Flee_Button.clicked.connect(self.flee)
@@ -180,8 +180,7 @@ class Combat(QMainWindow, Ui_Dialog):
                     self.close()
                     joueur.soigner_equipe()
     def flee(self):
-        self.label.setText("Ran away safely !") 
-        print("Ran away safely !")
+        self.zone_a_edit.setText("Ran away safely !")
         QtTest.QTest.qWait(1000)
         self.close()
         
