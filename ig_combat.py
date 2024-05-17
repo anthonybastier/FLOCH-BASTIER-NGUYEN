@@ -10,21 +10,14 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from joueur import *
 from pokemons import *
 
-####### Définition des protagonistes #######
-
-joueur = Joueur((0,0)) #joueur en 0,0
-pokemon_team = joueur.team[0]
-pokemon_team_HP_init = pokemon_team.HP
-index = rd.randint(0,150)
-pokemon_adv = liste_pokemon[index] #pokemon_adv.nom renvoie son nom dcp
-pokemon_adv_HP_init = pokemon_adv.HP
-
 ####### Interface Graphique de Combat #######
 
 class Ui_Dialog(object):
-    def setupUi(self, Dialog):
+    def setupUi(self, pokemon_team, pokemon_adv, Dialog):
         Dialog.setObjectName("Dialog")
         Dialog.resize(688, 888)
+        pokemon_adv_HP_init = pokemon_adv.HP
+        pokemon_team_HP_init = pokemon_team.HP
         self.Fond_Combat_Dialogue = QtWidgets.QLabel(Dialog)
         self.Fond_Combat_Dialogue.setGeometry(QtCore.QRect(0, 0, 691, 391))
         self.Fond_Combat_Dialogue.setText("")
@@ -127,10 +120,12 @@ class Ui_Dialog(object):
         self.zone_a_edit.setObjectName("zone_a_edit")
         self.zone_a_edit.setStyleSheet("QLineEdit { background-color: transparent; border: 0px }")
 
-        self.retranslateUi(Dialog)
+        self.retranslateUi(pokemon_team, pokemon_adv,Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
 
-    def retranslateUi(self, Dialog):
+    def retranslateUi(self, pokemon_team, pokemon_adv, Dialog):
+        pokemon_adv_HP_init = pokemon_adv.HP
+        pokemon_team_HP_init = pokemon_team.HP
         _translate = QtCore.QCoreApplication.translate
         Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
         self.Attack_Button.setText(_translate("Dialog", "Attack"))

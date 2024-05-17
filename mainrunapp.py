@@ -95,7 +95,7 @@ class Combat(QMainWindow, Ui_Dialog):
         self.pokemon_adv = matrice_collision[joueur.position[0]][joueur.position[1]][0]     
         self.HP_init_adv = self.pokemon_adv.HP
         
-        self.setupUi(self)
+        self.setupUi(self.pokemon_actuel, self.pokemon_adv, self)
         self.Pokemon_Button.clicked.connect(lambda: self.chgt_pokemon(joueur))
         self.Attack_Button.clicked.connect(lambda: self.attack(joueur, "normal attack"))
         self.Spe_Attack_Button.clicked.connect(lambda: self.attack(joueur, "special attack"))
@@ -277,5 +277,3 @@ def run_app():
     mainWin.show()
     app.exec_()
     
-    
-run_app()
