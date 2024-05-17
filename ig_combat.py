@@ -141,3 +141,8 @@ class Ui_Dialog(object):
         self.HP_adv.setText(_translate("Dialog", f"HP {pokemon_adv.HP}/{pokemon_adv_HP_init}"))
         self.HP_pokemon_team.setText(_translate("Dialog", f"HP {pokemon_team.HP}/{pokemon_team_HP_init}"))
         self.zone_a_edit.setText(_translate("Dialog", f"A {pokemon_adv.nom} appears !"))
+
+    def update_pokemon(self, Dialog, pokemon):
+        self.Nom_pokemon_team.setText(f"{pokemon.nom}")
+        self.HP_pokemon_team.setText(f"HP {pokemon.HP}/{pokemon.HP}")
+        self.sprite_team.setPixmap(QtGui.QPixmap(f"data/pokemon_sprite/{pokemon.nom}_d.png"))
