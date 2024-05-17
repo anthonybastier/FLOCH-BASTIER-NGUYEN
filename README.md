@@ -3,7 +3,7 @@
 # Mode d'emploi du GIT FLOCH-BASTIER-NGUYEN
 
 *Comment démarrer le jeu ?
-- Ouvrez le fichier mainrunapp.py 
+- Ouvrez le fichier main.py 
 - Lancer le jeu avec F5
 - Se déplacer avec les flèches directionnelles du clavier (input par input, ne pas rester appuyé)
 
