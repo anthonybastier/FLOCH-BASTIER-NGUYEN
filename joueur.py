@@ -1,38 +1,33 @@
 # -*- coding: utf-8 -*-
 """
-Created on Fri May  3 11:28:31 2024
-
-@author: Anthony Bastier
+@authors: Anais, Anthony, Thomas
 """
-
-#Import des Pokemons
+####### Imports #######
 from pokemons import *
-
-#Import des modules 
-import random as rd
 import copy
+
+####### Définition de la classe Joueur #######
 
 class Joueur:
     def __init__(self, position = [5,5]):
         """
         Initialise le joueur, avec les trois starters de la 1ere génération.
+        On les définit comme rencontrés, afin qu'ils apparaissent dans le 
+        Pokédex comme tels.
 
         Parameters
         ----------
         position : tuple, optional
-            Position de départ du personnage. Par défaut à (0,0).
-        Returns
-        -------
-        None.
+            Position de départ du personnage. Par défaut à [5,5].
 
         """
         
         self.position = position
         self.team = [copy.copy(liste_pokemon[0]),copy.copy(liste_pokemon[3]),copy.copy(liste_pokemon[6])]
         #Définition des pokémons de l'équipe comme attrapés
-        self.team[0].rencontre = True
-        self.team[1].rencontre = True
-        self.team[2].rencontre = True
+        liste_pokemon[0].rencontre = True
+        liste_pokemon[3].rencontre = True
+        liste_pokemon[6].rencontre = True
     
     def a_un_pokemon_non_ko(self):
         """
@@ -56,7 +51,6 @@ class Joueur:
         """
 
         for pokemon in self.team:
-            # Récupérer le HP max du Pokémon
+            #Récupère les HP max du Pokémon
             HP_max = liste_pokemon[pokemon.id-1].HP
-            # Soigner le Pokémon
             pokemon.HP = HP_max
