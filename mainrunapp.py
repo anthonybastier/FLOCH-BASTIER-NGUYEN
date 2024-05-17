@@ -86,7 +86,7 @@ class Overworld(QMainWindow):
 
 class Combat(QMainWindow, Ui_Dialog):
     
-    def __init__(self,adversaire, parent = None):
+    def __init__(self, parent = None):
         
         super(Combat, self).__init__(parent)
         #Récupération des stats initiales des PKMN

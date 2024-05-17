@@ -165,7 +165,7 @@ class Entites:
 
         """
 
-        for i in range(len(self.liste)):
+        for i in range(len(self.liste)-1):
             if self.liste[i].position == pos:
                 self.liste.pop(i)         
     
