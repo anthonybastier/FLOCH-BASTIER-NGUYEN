@@ -150,6 +150,7 @@ class Combat(QMainWindow, Ui_Dialog):
                 liste_entites.remove_pokemon(self.pokemon_adv.position)
                 matrice_collision[joueur.position[0]][joueur.position[1]].pop(0)
                 joueur.team.append(self.pokemon_adv)
+                pokemon_adv.rencontre = True
                 self.close()
                 joueur.soigner_equipe()
             else:
@@ -235,6 +236,7 @@ class Combat(QMainWindow, Ui_Dialog):
                     liste_entites.remove_pokemon(self.pokemon_adv.position)
                     matrice_collision[joueur.position[0]][joueur.position[1]].pop(0)
                     joueur.team.append(self.pokemon_adv)
+                    pokemon_adv.rencontre = True
                     self.close()
                     joueur.soigner_equipe()
     def flee(self):
