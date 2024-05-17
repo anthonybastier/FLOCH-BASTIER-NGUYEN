@@ -57,7 +57,7 @@ class Pokemon():
         if degats_attenues > 0 :
             return pokemon.HP - degats_attenues
         else : 
-            return pokemon.HP
+            return pokemon.HP + degats_attenues
         
         
     def attaque_spe(self, pokemon):
@@ -84,7 +84,7 @@ class Pokemon():
         if degats_attenues > 0 :
             return pokemon.HP - degats_attenues
         else : 
-            return pokemon.HP
+            return pokemon.HP + degats_attenues
         
     
     def choix_attaque(self):
