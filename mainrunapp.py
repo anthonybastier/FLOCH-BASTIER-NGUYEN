@@ -61,7 +61,9 @@ class Overworld(QMainWindow):
             elif joueur.position[0]<35 and joueur.position[0]>4:
                 self.carte.move("right")
                 joueur.position[0]+=1
-        print(joueur.position)
+        
+        if matrice_collision[joueur.position[0]][joueur.position[1]]!=[]:
+            combat_win=Combat()
     
     def setupUI(self):
         self.resize(500,500)
@@ -72,13 +74,13 @@ class Overworld(QMainWindow):
             
 class Combat(QMainWindow, Ui_Dialog):
     
-    def __init__(self, parent = None):
+    def __init__(self,adversaire, parent = None):
         
         super(Combat, self).__init__(parent)
         #Récupération des stats initiales des PKMN
         self.pokemon_actuel = joueur.team[0]
         self.HP_init_act = self.pokemon_actuel.HP
-        self.pokemon_adv = liste_pokemon[index]     
+        self.pokemon_adv = matrice_collision[joueur.position[0]][joueur.position[1]][0]     
         self.HP_init_adv = self.pokemon_adv.HP
         
         self.setupUi(self)
@@ -123,6 +125,7 @@ class Combat(QMainWindow, Ui_Dialog):
                 self.zone_a_edit.setText("You caught " + self.pokemon_adv.nom + " !")
                 QtTest.QTest.qWait(1000)
                 liste_entites.remove_pokemon(self.pokemon_adv.position)
+                matrice_collision[joueur.position[0]][joueur.position[1]].pop(0)
                 joueur.team.append(self.pokemon_adv)
                 self.close()
                 joueur.soigner_equipe()
@@ -207,6 +210,7 @@ class Combat(QMainWindow, Ui_Dialog):
                     self.zone_a_edit.setText("You caught " + self.pokemon_adv.nom + " !")
                     QtTest.QTest.qWait(1000)
                     liste_entites.remove_pokemon(self.pokemon_adv.position)
+                    matrice_collision[joueur.position[0]][joueur.position[1]].pop(0)
                     joueur.team.append(self.pokemon_adv)
                     self.close()
                     joueur.soigner_equipe()
