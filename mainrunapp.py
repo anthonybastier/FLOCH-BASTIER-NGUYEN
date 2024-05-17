@@ -26,10 +26,32 @@ joueur = Joueur([5,5])
 
 class Overworld(QMainWindow):
     def __init__(self):
+        """
+        initialise l objet overworld qui sert de support a l affichage de la phase de jeu hors combat
+
+        Returns
+        -------
+        None.
+
+        """
         QMainWindow.__init__(self)
         self.setEnabled(True)
     
     def keyPressEvent(self,event):
+        """
+        gere les inputs lors de la phase overworld notamment P pour ouvrir le pokedex (memoire des pokemons attrapes)
+        et les fleches directionnelles pour le deplacement du joueur ou de la carte selon les effets de bord
+        le deplacement peut aussi induire la rencontre avec des pokemons sauvages avec la matrice de collision construite dans pokemons.py
+        Parameters
+        ----------
+        event 
+            evenement d appui de touche lorsque la fenetre Overworld est ouverte
+
+        Returns
+        -------
+        None.
+
+        """
         
         if event.key()==Qt.Key_P:
             poke.run_app()
@@ -85,6 +107,16 @@ class Overworld(QMainWindow):
 
     
     def setupUI(self):
+        """
+        definit la taille de la fenetre de jeu
+        regroupe tous les objets a afficher lors de la phase de jeu Overworld (hors combat) la carte et le sprite
+        
+
+        Returns
+        -------
+        None.
+
+        """
         self.resize(500,500)
         self.setWindowTitle("Pookemon")
         self.carte=Carte(self)
