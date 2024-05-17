@@ -24,7 +24,7 @@ pokemon_adv_HP_init = pokemon_adv.HP
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
-        Dialog.resize(698, 888)
+        Dialog.resize(688, 888)
         self.Fond_Combat_Dialogue = QtWidgets.QLabel(Dialog)
         self.Fond_Combat_Dialogue.setGeometry(QtCore.QRect(0, 0, 691, 391))
         self.Fond_Combat_Dialogue.setText("")
