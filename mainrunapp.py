@@ -16,6 +16,16 @@ from PyQt5.QtWidgets import QMainWindow, QApplication, QDialog, QVBoxLayout, QPu
 from PyQt5 import QtTest
 from PyQt5.QtCore import Qt
 
+
+####### Définition des protagonistes #######
+
+joueur = Joueur([5,5]) #joueur en 0,0
+pokemon_team = joueur.team[0]
+pokemon_team_HP_init = pokemon_team.HP
+pokemon_adv = matrice_collision[joueur.position[0]][joueur.position[1]][0] #pokemon_adv.nom renvoie son nom dcp
+pokemon_adv_HP_init = pokemon_adv.HP
+
+
 ####### Programme principal #######
 
 class Overworld(QMainWindow):
@@ -61,9 +71,11 @@ class Overworld(QMainWindow):
             elif joueur.position[0]<35 and joueur.position[0]>4:
                 self.carte.move("right")
                 joueur.position[0]+=1
-        
+        print(joueur.position)
         if matrice_collision[joueur.position[0]][joueur.position[1]]!=[]:
-            combat_win=Combat()
+            print(matrice_collision[joueur.position[0]][joueur.position[1]][0].nom)
+            combat_win=Combat(matrice_collision[joueur.position[0]][joueur.position[1]][0])
+            combat_win.show()
     
     def setupUI(self):
         self.resize(500,500)
@@ -71,7 +83,7 @@ class Overworld(QMainWindow):
         self.carte=Carte(self)
         self.trainer=Sprite(self)
             
-            
+
 class Combat(QMainWindow, Ui_Dialog):
     
     def __init__(self,adversaire, parent = None):
@@ -260,9 +272,8 @@ class Choix(QDialog):
 
 def run_app():
     app = QApplication(sys.argv)
-    mainWin = Combat()
-    #mainWin = Overworld()
-    #mainWin.setupUI()
+    mainWin = Overworld()
+    mainWin.setupUI()
     mainWin.show()
     app.exec_()
     
