@@ -1089,7 +1089,4 @@ def run_app():
     app = QApplication(sys.argv)
     mainWin = Window()
     mainWin.show()
-    app.exec_()
-    
-    
-run_app()
+    app.exec_()    
