@@ -1094,8 +1094,6 @@ class Window_poke(QMainWindow, Ui_Dialog):
             
 
 def run_app():
-    app = QApplication(sys.argv)
+    global poke_Win
     poke_Win = Window_poke()
     poke_Win.show()
-    app.exec_()
-    return poke_win    
