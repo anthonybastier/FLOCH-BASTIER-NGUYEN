@@ -33,7 +33,7 @@ class Overworld(QMainWindow):
         
         if event.key()==Qt.Key_P:
             poke.run_app()
-            self.close()
+            
         
         if event.key()==Qt.Key_Up:
             if (joueur.position[1]<=5 and joueur.position[1]>0) or (joueur.position[1]>=36 and joueur.position[1]<=39):

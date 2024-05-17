@@ -9,6 +9,7 @@ from pokemons import liste_pokemon
 import sys
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QMainWindow, QApplication, QDialog
+from PyQt5.QtCore import Qt
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
@@ -1080,13 +1081,21 @@ class Ui_Dialog(object):
         Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
         
         
-class Window(QMainWindow, Ui_Dialog):
+class Window_poke(QMainWindow, Ui_Dialog):
     
     def __init__(self, parent = None):
-        super(Window, self).__init__(parent)
+        super(Window_poke, self).__init__(parent)
         self.setupUi(self)
+    
+    def keyPressEvent(self,event):
+        
+        if event.key()==Qt.Key_P:
+            self.close()
+            
+
 def run_app():
     app = QApplication(sys.argv)
-    mainWin = Window()
-    mainWin.show()
-    app.exec_()    
+    poke_Win = Window_poke()
+    poke_Win.show()
+    app.exec_()
+    return poke_win    
