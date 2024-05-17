@@ -1,11 +1,8 @@
 # -*- coding: utf-8 -*-
 """
-Created on Mon May  6 16:31:30 2024
-
-@author: anais
+@authors: Anais, Anthony, Thomas
 """
 ####### Imports #######
-
 from ig_combat import *
 from joueur import *
 from pokemons import *
@@ -13,6 +10,7 @@ from map_tomata import *
 from ig_combat import *
 import pokedex as poke
 import sys
+import numpy as np
 from PyQt5.QtWidgets import QMainWindow, QApplication, QDialog, QVBoxLayout, QPushButton, QLabel
 from PyQt5 import QtTest
 from PyQt5.QtCore import Qt
@@ -20,43 +18,58 @@ from PyQt5.QtCore import Qt
 
 ####### Initialisation du joueur #######
 
-joueur = Joueur([5,5])
+joueur = Joueur() #Initialise le joueur à la position [5,5] et avec les starters
+
+####### Construction de la matrice de collision #######
+"""
+On construit la matrice de collision du jeu par projection des positions des 
+Pokémons sur une grille 40x40.
+Une liste vide correspond à une absence de pokemon sauvage et donc de collision.
+Une liste non vide contient tous les pokemons qui se retrouvent avec la même position dans notre grille de jeu 40x40.
+
+"""
+matrice_collision=[[[]for i in range(40)]for j in range(40)] 
+liste_pos=[]
+for i in liste_entites:
+    liste_pos.append(i.position)
+liste_pos=np.array(liste_pos).transpose()
+minx,maxx=min(liste_pos[0]),max(liste_pos[0])
+miny,maxy=min(liste_pos[1]),max(liste_pos[1])
+
+for i in  liste_entites:
+    matrice_collision[int((i.position[0]-minx)*39/(maxx-minx))][int((i.position[1]-miny)*39/(maxy-miny))].append(i)
 
 ####### Programme principal #######
 
 class Overworld(QMainWindow):
     def __init__(self):
         """
-        initialise l objet overworld qui sert de support a l affichage de la phase de jeu hors combat
-
-        Returns
-        -------
-        None.
-
+        Initialise l'objet Overworld qui sert de support à l'affichage de la phase de jeu hors combat.
+        
         """
         QMainWindow.__init__(self)
         self.setEnabled(True)
     
     def keyPressEvent(self,event):
         """
-        gere les inputs lors de la phase overworld notamment P pour ouvrir le pokedex (memoire des pokemons attrapes)
-        et les fleches directionnelles pour le deplacement du joueur ou de la carte selon les effets de bord
-        le deplacement peut aussi induire la rencontre avec des pokemons sauvages avec la matrice de collision construite dans pokemons.py
+        Gère les inputs lors de la phase overworld notamment P pour ouvrir le
+        Pokédex (memoire des Pokémons attrapés) et les flèches directionnelles 
+        pour le déplacement du joueur ou de la carte selon les effets de bord.
+        Le déplacement peut aussi induire la rencontre avec des Pokémons 
+        sauvages avec la matrice de collision construite dans pokemons.py
+        
         Parameters
         ----------
         event 
-            evenement d appui de touche lorsque la fenetre Overworld est ouverte
-
-        Returns
-        -------
-        None.
+            Evènement d'appui de touche lorsque la fenêtre Overworld est ouverte.
 
         """
         
+        #Ouverture du Pokédex
         if event.key()==Qt.Key_P:
             poke.run_app()
             
-        
+        #Déplacements du joueur
         if event.key()==Qt.Key_Up:
             if (joueur.position[1]<=5 and joueur.position[1]>0) or (joueur.position[1]>=36 and joueur.position[1]<=39):
                 self.trainer.move("up")
@@ -69,7 +82,6 @@ class Overworld(QMainWindow):
                 combat_win=Combat()
                 combat_win.show()
 
-
         if event.key()==Qt.Key_Down:
             if (joueur.position[1]<=4 and joueur.position[1]>=0) or (joueur.position[1]>=35 and joueur.position[1]<39):
                 self.trainer.move("down")
@@ -80,8 +92,6 @@ class Overworld(QMainWindow):
             if matrice_collision[joueur.position[0]][joueur.position[1]]!=[]:
                 combat_win=Combat()
                 combat_win.show()            
-                
-                
                 
         if event.key()==Qt.Key_Left:
             if (joueur.position[0]<=5 and joueur.position[0]>0) or (joueur.position[0]>=36 and joueur.position[0]<=39):
@@ -108,13 +118,9 @@ class Overworld(QMainWindow):
     
     def setupUI(self):
         """
-        definit la taille de la fenetre de jeu
-        regroupe tous les objets a afficher lors de la phase de jeu Overworld (hors combat) la carte et le sprite
-        
-
-        Returns
-        -------
-        None.
+        Définit la taille de la fenêtre de jeu. Regroupe tous les objets à
+        afficher lors de la phase de jeu Overworld (hors combat) la carte et
+        le sprite du joueur.
 
         """
         self.resize(500,500)
@@ -126,21 +132,41 @@ class Overworld(QMainWindow):
 class Combat(QMainWindow, Ui_Dialog):
     
     def __init__(self, parent = None):
-        
+        """
+        Initialise un combat Pokémon. Fait apparaître l'interface graphique du 
+        choix, le Pokémon actuel du joueur et le Pokémon adverse avec leurs HP
+        respectifs. Le joueur peut choisir entre une attaque normale, une 
+        attaque spéciale, la fuite et le changement de Pokémon.
+        """
         super(Combat, self).__init__(parent)
-        #Récupération des stats initiales des PKMN
+        
+        #Récupération des stats initiales des Pokémons
         self.pokemon_actuel = joueur.team[0]
         self.HP_init_act = self.pokemon_actuel.HP
         self.pokemon_adv = matrice_collision[joueur.position[0]][joueur.position[1]][0]     
         self.HP_init_adv = self.pokemon_adv.HP
         
+        #Récupération des inputs
         self.setupUi(self.pokemon_actuel, self.pokemon_adv, self)
         self.Pokemon_Button.clicked.connect(lambda: self.chgt_pokemon(joueur))
         self.Attack_Button.clicked.connect(lambda: self.attack(joueur, "normal attack"))
         self.Spe_Attack_Button.clicked.connect(lambda: self.attack(joueur, "special attack"))
         self.Flee_Button.clicked.connect(self.flee)
     
-    def chgt_pokemon(self, joueurs):
+    def chgt_pokemon(self, joueur):
+        """
+        Permet au joueur de changer de Pokémon. Cette fonction est appelée si 
+        le Pokémon actuel est KO ou si le joueur a utilisé le bouton dédié.
+        Cette fonction fait appel à la classe Choix, qui permet d'afficher les
+        Pokémons de l'équipe. Quand un Pokémon est KO, on l'enlève de la 
+        liste des Pokémons de la carte et de la matrice des collisions, puis on
+        l'ajoute à l'équipe et on le marque comme rencontré pour le Pokédex.
+
+        Parameters
+        ----------
+        joueur : Joueur
+            Le joueur initialisé plus tôt. Permet d'accéder à son équipe.
+        """
         dlg = Choix(self)
         dlg.exec()
         
@@ -149,30 +175,47 @@ class Combat(QMainWindow, Ui_Dialog):
         self.HP_init_act = self.pokemon_actuel.HP
 
     def attack(self, joueur, attaque):
+        """
+        Lance les attaques, à la fois sur le Pokémon actuel et sur l'adversaire.
+        Compare d'abord les vitesses des Pokémons, pour savoir qui agit en 
+        premier.
+
+        Parameters
+        ----------
+        joueur : Joueur
+            Le joueur.
+        attaque : str
+            Permet de spécifier s'il s'agit d'une attaque spéciale ou normale.
+            
+        """
         #Type de l'attaque
         if attaque == "normal attack":
             atq = self.pokemon_actuel.attaque_norm
         else:
             atq = self.pokemon_actuel.attaque_spe
         
-        #Quel Pokémon agit en premier
+        #Quel Pokémon agit en premier ?
         v1 = self.pokemon_actuel.speed
-        v2 = self.pokemon_adv.speed    
+        v2 = self.pokemon_adv.speed 
         if v1 > v2 :
+            
             #Le Pokémon du joueur attaque en premier
             self.zone_a_edit.setText(f"{self.pokemon_actuel.nom} uses a "+attaque)
             hp_p2 = atq(self.pokemon_adv)
             
-            #La fonction attaque renvoyant les HP du pokémon attaqués selon ses HP initiaux, on vient modifier les HP initiaux avec la nouvelle valeur
+            #Pas de HP négatifs
             if hp_p2 < 0:
                 self.pokemon_adv.HP = 0
             else:
                 self.pokemon_adv.HP = hp_p2
-                
+            
+            #Affichage des HP
             self.HP_adv.setText(f"HP {self.pokemon_adv.HP}/{self.HP_init_adv}")
             QtTest.QTest.qWait(1000)
             
-            if hp_p2 <= 0: #Combat gagné
+            #Combat gagné ?
+            if hp_p2 <= 0: 
+                #Pokémon adverse KO
                 self.zone_a_edit.setText("You caught " + self.pokemon_adv.nom + " !")
                 QtTest.QTest.qWait(1000)
                 liste_entites.remove_pokemon(self.pokemon_adv.position)
@@ -267,7 +310,12 @@ class Combat(QMainWindow, Ui_Dialog):
                     liste_pokemon[self.pokemon_adv.id -1].rencontre = True
                     self.close()
                     joueur.soigner_equipe()
+                    
     def flee(self):
+        """
+        Permet de fuir du combat
+        
+        """
         self.zone_a_edit.setText("Ran away safely !")
         QtTest.QTest.qWait(1000)
         joueur.soigner_equipe()
@@ -280,6 +328,11 @@ class Choix(QDialog):
 
         
     def __init__(self, parent=None):
+        """
+        Permet d'initialiser la fenêtre de choix des Pokémons, en affichant les
+        Pokémons de l'équipe et s'ils sont KO ou non.
+
+        """
         super().__init__(parent)
 
         self.setWindowTitle("Switch to which Pokémon ?")
@@ -303,6 +356,15 @@ class Choix(QDialog):
             self.layout.addWidget(button)
 
     def switch_pokemon(self, index):
+        """
+        Permet de changer de Pokémon.
+
+        Parameters
+        ----------
+        index : int
+            Identifiant du Pokémon à supprimer de l'équipe.
+
+        """
         nouveau_pkmn = joueur.team[index]
         joueur.team[index] = joueur.team[0]
         joueur.team[0] = nouveau_pkmn

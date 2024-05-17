@@ -7,7 +7,6 @@ import csv
 import pandas as pd
 import random as rd
 import copy
-import numpy as np
 
 ####### Définition de la classe Pokémon #######
 
@@ -285,23 +284,3 @@ class Entites:
         return txt
 
 liste_entites = Entites(r"data\pokemon_coordinates.csv",liste_pokemon)
-
-
-####### Construction de la matrice de collision #######
-"""
-On construit la matrice de collision du jeu par projection des positions des 
-Pokémons sur une grille 40x40.
-Une liste vide correspond à une absence de pokemon sauvage et donc de collision.
-Une liste non vide contient tous les pokemons qui se retrouvent avec la même position dans notre grille de jeu 40x40.
-
-"""
-matrice_collision=[[[]for i in range(40)]for j in range(40)] 
-liste_pos=[]
-for i in liste_entites:
-    liste_pos.append(i.position)
-liste_pos=np.array(liste_pos).transpose()
-minx,maxx=min(liste_pos[0]),max(liste_pos[0])
-miny,maxy=min(liste_pos[1]),max(liste_pos[1])
-
-for i in  liste_entites:
-    matrice_collision[int((i.position[0]-minx)*39/(maxx-minx))][int((i.position[1]-miny)*39/(maxy-miny))].append(i)
