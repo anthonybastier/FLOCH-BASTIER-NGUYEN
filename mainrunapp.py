@@ -74,7 +74,7 @@ class Overworld(QMainWindow):
         print(joueur.position)
         if matrice_collision[joueur.position[0]][joueur.position[1]]!=[]:
             print(matrice_collision[joueur.position[0]][joueur.position[1]][0].nom)
-            combat_win=Combat(matrice_collision[joueur.position[0]][joueur.position[1]][0])
+            combat_win=Combat()
             combat_win.show()
     
     def setupUI(self):
@@ -229,6 +229,7 @@ class Combat(QMainWindow, Ui_Dialog):
     def flee(self):
         self.zone_a_edit.setText("Ran away safely !")
         QtTest.QTest.qWait(1000)
+        joueur.soigner_equipe()
         self.close()
         
        
