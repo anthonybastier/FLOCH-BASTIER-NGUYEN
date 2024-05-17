@@ -58,7 +58,6 @@ class Combat(QMainWindow, Ui_Dialog):
     
     def chgt_pokemon(self, joueurs):
         dlg = Choix(self)
-        dlg.exec()
         
         hp_p1 = self.pokemon_adv.choix_attaque()(self.pokemon_actuel)
         
@@ -129,8 +128,7 @@ class Combat(QMainWindow, Ui_Dialog):
                     if joueur.a_un_pokemon_non_ko():
                         #Obligé de changer de Pokémon
                         print("Obligé de changer de Pokémon")
-                        dlg = Choix()
-                        dlg.exec()
+                        dlg = self.chgt_pokemon(joueur)
                     else:
                         #Combat perdu
                         print("Combat perdu")
@@ -244,7 +242,6 @@ class Choix(QDialog):
 
         # Update the displayed Pokémon information in the combat window
         self.parent().update_pokemon(self,nouveau_pkmn)
-        print("test")
         self.close()
 
 def run_app():
