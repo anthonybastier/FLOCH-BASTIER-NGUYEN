@@ -15,13 +15,13 @@ for i in range(151):
     
 import sys
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtWidgets import QMainWindow, QApplication, QDialog
+from PyQt5.QtWidgets import QMainWindow, QScrollArea, QApplication, QDialog, QLabel, QVBoxLayout, QWidget
 
 
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
-        Dialog.resize(840, 1800)
+        Dialog.resize(840, 1200)
         self.p1 = QtWidgets.QLabel(Dialog)
         self.p1.setGeometry(QtCore.QRect(10, 0, 91, 101))
         self.p1.setText("")
@@ -928,6 +928,10 @@ class Ui_Dialog(object):
         self.p151.setTextFormat(QtCore.Qt.RichText)
         self.p151.setPixmap(QtGui.QPixmap("data/pokemon_sprite/Mew_F.png"))
         self.p151.setObjectName("p151")
+        self.verticalScrollBar = QtWidgets.QScrollBar(Dialog)
+        self.verticalScrollBar.setGeometry(QtCore.QRect(820, 10, 20, 1200))
+        self.verticalScrollBar.setOrientation(QtCore.Qt.Vertical)
+        self.verticalScrollBar.setObjectName("verticalScrollBar")
         
 
         self.retranslateUi(Dialog)
@@ -943,7 +947,9 @@ class Window(QMainWindow, Ui_Dialog):
     def __init__(self, parent = None):
         super(Window, self).__init__(parent)
         self.setupUi(self)
-
+        self.setWindowTitle('Pokedex')
+    
+       
 
 def run_app():
     app = QApplication(sys.argv)
