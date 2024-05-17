@@ -9,11 +9,14 @@ import numpy as np
 from PyQt5 import QtCore
 from PyQt5 import QtWidgets
 from PyQt5 import QtGui
+from PyQt5 import QtTest
 from joueur import *
+from pokemons import *
+
 
 
         
-joueur=Joueur([5,5])
+
 class Carte():
     def __init__(self,mainWindow):
         self.carte=QtWidgets.QLabel(mainWindow)
@@ -22,31 +25,80 @@ class Carte():
         self.carte.setScaledContents(True)
         self.carte.setObjectName("carte")
         self.carte.setPixmap(QtGui.QPixmap("./data/pokemap.jpg"))
+        self.mainWindow=mainWindow
     
     def move(self,direction):
         pos=self.carte.geometry()
         
+
         if direction == "up":
-            pos.translate(0,50)
-            joueur.position[1]+=0.5
+            
+            pos.translate(0,20)
             self.carte.setGeometry(pos)
+            self.mainWindow.trainer.sprite.setPixmap(QtGui.QPixmap("./data/trainer/trainer_back_walk1.png"))
+            QtTest.QTest.qWait(50)
+            
+            pos.translate(0,20)
+            self.carte.setGeometry(pos)
+            self.mainWindow.trainer.sprite.setPixmap(QtGui.QPixmap("./data/trainer/trainer_back_walk2.png"))
+            QtTest.QTest.qWait(50)        
+            
+            pos.translate(0,10)
+            self.carte.setGeometry(pos)
+            self.mainWindow.trainer.sprite.setPixmap(QtGui.QPixmap("./data/trainer/trainer_back.png"))
+
 
         if direction == "down":
-            pos.translate(0,-50)
-            joueur.position[1]-=0.5
+
+            pos.translate(0,-20)
             self.carte.setGeometry(pos)
+            self.mainWindow.trainer.sprite.setPixmap(QtGui.QPixmap("./data/trainer/trainer_front_walk1.png"))
+            QtTest.QTest.qWait(50)
+
+            pos.translate(0,-20)
+            self.carte.setGeometry(pos)
+            self.mainWindow.trainer.sprite.setPixmap(QtGui.QPixmap("./data/trainer/trainer_front_walk2.png"))
+            QtTest.QTest.qWait(50)
+            
+            pos.translate(0,-10)
+            self.carte.setGeometry(pos)
+            self.mainWindow.trainer.sprite.setPixmap(QtGui.QPixmap("./data/trainer/trainer_front.png"))
+
             
         if direction == "left":
-            pos.translate(50,0)
-            joueur.position[0]-=0.5
+            
+            pos.translate(20,0)
             self.carte.setGeometry(pos)
+            self.mainWindow.trainer.sprite.setPixmap(QtGui.QPixmap("./data/trainer/trainer_left_walk1.png"))
+            QtTest.QTest.qWait(50)
 
+            pos.translate(20,0)
+            self.carte.setGeometry(pos)
+            self.mainWindow.trainer.sprite.setPixmap(QtGui.QPixmap("./data/trainer/trainer_left_walk2.png"))
+            QtTest.QTest.qWait(50)
+
+            pos.translate(10,0)
+            self.carte.setGeometry(pos)
+            self.mainWindow.trainer.sprite.setPixmap(QtGui.QPixmap("./data/trainer/trainer_left.png"))            
+            
 
         if direction == "right":
-            pos.translate(-50,0)
-            joueur.position[0]+=0.5
+
+            pos.translate(-20,0)
             self.carte.setGeometry(pos)
-        
+            self.mainWindow.trainer.sprite.setPixmap(QtGui.QPixmap("./data/trainer/trainer_right_walk1.png"))
+            QtTest.QTest.qWait(50)
+
+            pos.translate(-20,0)
+            self.carte.setGeometry(pos)
+            self.mainWindow.trainer.sprite.setPixmap(QtGui.QPixmap("./data/trainer/trainer_right_walk2.png"))
+            QtTest.QTest.qWait(50)
+
+            pos.translate(-10,0)
+            self.carte.setGeometry(pos)
+            self.mainWindow.trainer.sprite.setPixmap(QtGui.QPixmap("./data/trainer/trainer_right.png"))
+
+
 
 
 
@@ -56,8 +108,82 @@ class Sprite():
         self.sprite.setGeometry(250,250,50,50)
         self.sprite.setText("")
         self.sprite.setScaledContents(True)
-        self.sprite.setPixmap(QtGui.QPixmap("./data/trainer.png"))
+        self.sprite.setPixmap(QtGui.QPixmap("./data/trainer/trainer_front.png"))
         self.sprite.setObjectName('player')
+        self.mainWindow=mainWindow
+    
+    
+    def move(self,direction):
+        pos=self.sprite.geometry()
+        
+
+        if direction == "up":
+            
+            pos.translate(0,-20)
+            self.sprite.setGeometry(pos)
+            self.mainWindow.trainer.sprite.setPixmap(QtGui.QPixmap("./data/trainer/trainer_back_walk1.png"))
+            QtTest.QTest.qWait(50)
+            
+            pos.translate(0,-20)
+            self.sprite.setGeometry(pos)
+            self.mainWindow.trainer.sprite.setPixmap(QtGui.QPixmap("./data/trainer/trainer_back_walk2.png"))
+            QtTest.QTest.qWait(50)        
+            
+            pos.translate(0,-10)
+            self.sprite.setGeometry(pos)
+            self.mainWindow.trainer.sprite.setPixmap(QtGui.QPixmap("./data/trainer/trainer_back.png"))
+
+
+        if direction == "down":
+
+            pos.translate(0,20)
+            self.sprite.setGeometry(pos)
+            self.mainWindow.trainer.sprite.setPixmap(QtGui.QPixmap("./data/trainer/trainer_front_walk1.png"))
+            QtTest.QTest.qWait(50)
+
+            pos.translate(0,20)
+            self.sprite.setGeometry(pos)
+            self.mainWindow.trainer.sprite.setPixmap(QtGui.QPixmap("./data/trainer/trainer_front_walk2.png"))
+            QtTest.QTest.qWait(50)
+            
+            pos.translate(0,10)
+            self.sprite.setGeometry(pos)
+            self.mainWindow.trainer.sprite.setPixmap(QtGui.QPixmap("./data/trainer/trainer_front.png"))
+
+            
+        if direction == "left":
+            
+            pos.translate(-20,0)
+            self.sprite.setGeometry(pos)
+            self.mainWindow.trainer.sprite.setPixmap(QtGui.QPixmap("./data/trainer/trainer_left_walk1.png"))
+            QtTest.QTest.qWait(50)
+
+            pos.translate(-20,0)
+            self.sprite.setGeometry(pos)
+            self.mainWindow.trainer.sprite.setPixmap(QtGui.QPixmap("./data/trainer/trainer_left_walk2.png"))
+            QtTest.QTest.qWait(50)
+
+            pos.translate(-10,0)
+            self.sprite.setGeometry(pos)
+            self.mainWindow.trainer.sprite.setPixmap(QtGui.QPixmap("./data/trainer/trainer_left.png"))            
+            
+
+        if direction == "right":
+
+            pos.translate(20,0)
+            self.sprite.setGeometry(pos)
+            self.mainWindow.trainer.sprite.setPixmap(QtGui.QPixmap("./data/trainer/trainer_right_walk1.png"))
+            QtTest.QTest.qWait(50)
+
+            pos.translate(20,0)
+            self.sprite.setGeometry(pos)
+            self.mainWindow.trainer.sprite.setPixmap(QtGui.QPixmap("./data/trainer/trainer_right_walk2.png"))
+            QtTest.QTest.qWait(50)
+
+            pos.translate(10,0)
+            self.sprite.setGeometry(pos)
+            self.mainWindow.trainer.sprite.setPixmap(QtGui.QPixmap("./data/trainer/trainer_right.png"))
+        
     
 
     
