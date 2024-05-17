@@ -13,7 +13,7 @@ import numpy as np
 
 class Pokemon():
     
-    def __init__(self, id, nom, type, type2, HP, attack, defense, sp_atk, sp_def, speed, position,legendary = False, rencontre=False):
+    def __init__(self, id, nom, type, type2, HP, attack, defense, sp_atk, sp_def, speed, position, legendary = False, rencontre=False):
         """
         Initialise un Pokémon avec toutes ses caractéristiques, dont la 
         position et s'il a été rencontré ou non.
