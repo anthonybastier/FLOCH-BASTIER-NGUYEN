@@ -15,7 +15,7 @@ import numpy as np
 class Pokemon():
     
     
-    def __init__(self, id, nom, type, type2, HP, attack, defense, sp_atk, sp_def, speed, position, legendary = False):
+    def __init__(self, id, nom, type, type2, HP, attack, defense, sp_atk, sp_def, speed, position,legendary = False, rencontre=False):
         self.id = id
         self.nom = nom
         self.type = type
@@ -27,6 +27,7 @@ class Pokemon():
         self.sp_def = sp_def
         self.speed = speed
         self.position = position
+        self.rencontre = rencontre
         self.legendary = legendary
          
     def attaque_norm(self, pokemon):
