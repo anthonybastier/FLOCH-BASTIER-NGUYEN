@@ -1,17 +1,28 @@
 # -*- coding: utf-8 -*-
 """
-Created on Mon May 13 15:53:20 2024
-@author: anais
+@authors: Anais, Anthony, Thomas
 """
-#Import des Pokemons
+####### Imports #######
 from pokemons import liste_pokemon
-    
-import sys
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtWidgets import QMainWindow, QApplication, QDialog
+from PyQt5.QtWidgets import QMainWindow
 from PyQt5.QtCore import Qt
+
+####### Création du Pokédex #######
+
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
+        """
+        Crée le Pokédex et le remplit avec les Pokémons capturés. 
+        Pour chaque Pokémon de la 1ère génération, on regarde si son attribut
+        rencontre est à True. Si oui, on l'affiche sur le Pokédex. Sinon,
+        son emplacement reste vide.
+
+        Parameters
+        ----------
+        Dialog :
+            Objet PyQt pour définir la fenêtre.
+        """
         Dialog.setObjectName("Dialog")
         Dialog.resize(1460, 1000)
         
@@ -867,7 +878,7 @@ class Ui_Dialog(object):
             self.p122.setGeometry(QtCore.QRect(100, 800, 91, 101))
             self.p122.setText("")
             self.p122.setTextFormat(QtCore.Qt.RichText)
-            self.p122.setPixmap(QtGui.QPixmap("data/pokemon_sprite/Mr.Mime_F.png"))
+            self.p122.setPixmap(QtGui.QPixmap("data/pokemon_sprite/Mr. Mime_F.png"))
             self.p122.setObjectName("p122")
         if liste_pokemon[122].rencontre == True :
             self.p123 = QtWidgets.QLabel(Dialog)
@@ -1072,28 +1083,33 @@ class Ui_Dialog(object):
             self.p151.setTextFormat(QtCore.Qt.RichText)
             self.p151.setPixmap(QtGui.QPixmap("data/pokemon_sprite/Mew_F.png"))
             self.p151.setObjectName("p151")
-    
-
-        self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
-    def retranslateUi(self, Dialog):
-        _translate = QtCore.QCoreApplication.translate
-        Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
+
         
         
 class Window_poke(QMainWindow, Ui_Dialog):
     
     def __init__(self, parent = None):
+        """
+        Fenêtre contenant le Pokédex créé dans Setup_UI.
+        """
         super(Window_poke, self).__init__(parent)
         self.setupUi(self)
     
     def keyPressEvent(self,event):
-        
+        """
+        Méthode pour fermer la fenêtre du Pokédex en réappuyant sur "P".
+
+        """       
         if event.key()==Qt.Key_P:
             self.close()
             
 
 def run_app():
+    """
+    A lancer pour afficher le Pokédex.
+
+    """
     global poke_Win
     poke_Win = Window_poke()
     poke_Win.show()
