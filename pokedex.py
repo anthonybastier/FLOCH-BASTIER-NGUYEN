@@ -15,7 +15,7 @@ from PyQt5.QtWidgets import QMainWindow, QApplication, QDialog
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
-        Dialog.resize(1360, 1100)
+        Dialog.resize(1460, 1000)
         self.p1 = QtWidgets.QLabel(Dialog)
         self.p1.setGeometry(QtCore.QRect(10, 0, 91, 101))
         self.p1.setText("")
@@ -923,7 +923,7 @@ class Ui_Dialog(object):
         self.p150.setPixmap(QtGui.QPixmap("data/pokemon_sprite/Mewtwo_F.png"))
         self.p150.setObjectName("p150")
         self.p151 = QtWidgets.QLabel(Dialog)
-        self.p151.setGeometry(QtCore.QRect(10, 1000, 91, 101))
+        self.p151.setGeometry(QtCore.QRect(1360, 900, 91, 101))
         self.p151.setText("")
         self.p151.setTextFormat(QtCore.Qt.RichText)
         self.p151.setPixmap(QtGui.QPixmap("data/pokemon_sprite/Mew_F.png"))
