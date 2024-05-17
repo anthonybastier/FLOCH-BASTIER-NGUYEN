@@ -6,7 +6,7 @@
 from ig_combat import *
 from joueur import *
 from pokemons import *
-from map_tomata import *
+from interface_overworld import *
 from ig_combat import *
 import pokedex as poke
 import sys
