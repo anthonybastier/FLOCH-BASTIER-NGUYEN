@@ -6,7 +6,8 @@ Created on Fri May 17 16:07:45 2024
 """
 
 ####### Imports #######
-from mainrunapp import *
+from joueur import *
+from mainrunapp import run_app
 
 ####### Programme principal #######
 joueur = Joueur()
