@@ -63,7 +63,6 @@ class Combat(QMainWindow, Ui_Dialog):
         hp_p1 = self.pokemon_adv.choix_attaque()(self.pokemon_actuel)
         
         
-        
         if hp_p1 <= 0:
             #Pokémon actuel KO
             if joueur.a_un_pokemon_non_ko():
@@ -88,11 +87,16 @@ class Combat(QMainWindow, Ui_Dialog):
         v2 = self.pokemon_adv.speed    
         if v1 > v2 :
             #Le Pokémon du joueur attaque en premier
+            print("Le Pokémon du joueur attaque en premier")
             self.zone_a_edit.setText((f"{self.pokemon_actuel.nom} uses a "+attaque))
             hp_p2 = atq(self.pokemon_adv)
             
             #La fonction attaque renvoyant les HP du pokémon attaqués selon ses HP initiaux, on vient modifier les HP initiaux avec la nouvelle valeur
-            self.pokemon_adv.HP = hp_p2
+            if hp_p2 < 0:
+                self.pokemon_adv.HP = 0
+            else:
+                self.pokemon_adv.HP = hp_p2
+                
             self.HP_adv.setText(f"HP {self.pokemon_adv.HP}/{self.HP_init_adv}")
         
             if hp_p2 <= 0: #Combat gagné
@@ -103,9 +107,9 @@ class Combat(QMainWindow, Ui_Dialog):
                 joueur.soigner_equipe()
             else:
                 #Le Pokémon adverse attaque en deuxième
+                print("Le Pokémon adverse attaque en deuxième")
                 adv_atk = self.pokemon_adv.choix_attaque()
                 if adv_atk == "attaque_norm":
-                    print(str(adv_atk))
                     self.zone_a_edit.setText((f"{self.pokemon_adv.nom} uses a normal attack"))
                     hp_p1 = self.pokemon_adv.attaque_norm(self.pokemon_actuel)
                     self.pokemon_actuel.HP = hp_p1
@@ -114,21 +118,28 @@ class Combat(QMainWindow, Ui_Dialog):
                     hp_p1 = self.pokemon_adv.attaque_spe(self.pokemon_actuel)
                     self.pokemon_actuel.HP = hp_p1
                     
+                if hp_p1 < 0:
+                    self.pokemon_actuel.HP = 0
+                    
                 self.HP_pokemon_team.setText(f"HP {self.pokemon_actuel.HP}/{self.HP_init_act}")
                 
                 if hp_p1 <= 0:
                     #Pokémon actuel KO
+                    print("Pokémon actuel KO")
                     if joueur.a_un_pokemon_non_ko():
                         #Obligé de changer de Pokémon
+                        print("Obligé de changer de Pokémon")
                         dlg = Choix()
                         dlg.exec()
                     else:
                         #Combat perdu
+                        print("Combat perdu")
                         print("Out of usable Pokemon !")
                         self.close()
                         joueur.soigner_equipe()
         else:
             #Le Pokémon adverse attaque en premier
+            print("Le Pokémon adverse attaque en premier")
             adv_atk = self.pokemon_adv.choix_attaque()
             if adv_atk == "attaque_norm":
                 self.zone_a_edit.setText(f"{self.pokemon_adv.nom} uses a normal attack")
@@ -138,28 +149,41 @@ class Combat(QMainWindow, Ui_Dialog):
                 self.zone_a_edit.setText(f"{self.pokemon_adv.nom} uses a special attack")
                 hp_p1 = self.pokemon_adv.attaque_spe(self.pokemon_actuel)
                 self.pokemon_actuel.HP = hp_p1
-            self.HP_pokemon_team.setText(f"HP {self.pokemon_actuel.HP}/{self.HP_init_act}")
+      
+            if hp_p1 < 0:
+                self.pokemon_actuel.HP = 0  
+                
+            self.HP_pokemon_team.setText(f"HP {self.pokemon_actuel.HP}/{self.HP_init_act}")   
 
-            
             if hp_p1 <= 0:
                 #Pokémon actuel KO
+                print("Pokémon actuel KO")
                 if joueur.a_un_pokemon_non_ko():
                     #Obligé de changer de Pokémon
                     self.chgt_pokemon(joueur)
                 else:
                     #Combat perdu
+                    print("Combat perdu")
                     print("Out of usable Pokemon !")
                     self.close()
                     joueur.soigner_equipe()
             else:
-                # Le Pokémon du joueur attaque en deuxième
+                #Le Pokémon du joueur attaque en deuxième
+                print("Le Pokémon du joueur attaque en deuxième")
                 self.zone_a_edit.setText((f"{self.pokemon_actuel.nom} uses a "+attaque))
                 hp_p2 = atq(self.pokemon_adv)
                 
                 self.pokemon_adv.HP = hp_p2
+                
+                if hp_p2 < 0:
+                    self.pokemon_adv.HP = 0
+                else:
+                    self.pokemon_adv.HP = hp_p2   
+                    
                 self.HP_adv.setText(f"HP {self.pokemon_adv.HP}/{self.HP_init_adv}")
                 
-                # Vérifier si le Pokémon adverse est KO
+                #Vérifier si le Pokémon adverse est KO
+                print("Vérifier si le Pokémon adverse est KO")
                 if hp_p2 <= 0:
                     self.zone_a_edit.setText("You caught " + self.pokemon_adv.nom + " !")
                     print("You caught " + self.pokemon_adv.nom + " !")
@@ -170,14 +194,58 @@ class Combat(QMainWindow, Ui_Dialog):
         self.label.setText("Ran away safely !") 
         print("Ran away safely !")
         self.close()
+        
        
         
         
 class Choix(QDialog):
-    def __init__(self, parent = None):
-        super(Choix, self).__init__(parent)
-        self.ui = Ui_Dialog()
-        self.ui.setupUi(self)
+
+        
+    def __init__(self, parent=None):
+        super().__init__(parent)
+
+        # Window title
+        self.setWindowTitle("Change Pokémon")
+
+        # Layout
+        self.layout = QVBoxLayout()
+        self.setLayout(self.layout)
+
+        # Label for displaying current Pokémon
+        self.label_current_pokemon = QLabel(f"Current Pokémon: {joueur.team[0].nom}")
+        self.layout.addWidget(self.label_current_pokemon)
+
+        # Create buttons for each Pokémon in the team
+        self.pokemon_buttons = []
+        for i, pokemon in enumerate(joueur.team):
+            if pokemon.HP == 0 :
+                # Disable button if Pokémon is KO
+                button = QPushButton(f"{pokemon.nom} (KO)")
+                button.setEnabled(False)
+            else:
+                # Enable button for healthy Pokémon
+                button = QPushButton(pokemon.nom)
+                button.clicked.connect(lambda _, index=i: self.switch_pokemon(index))
+
+            self.pokemon_buttons.append(button)
+            self.layout.addWidget(button)
+
+        # Cancel button
+        self.cancel_button = QPushButton("Cancel")
+        self.cancel_button.clicked.connect(self.close)
+        self.layout.addWidget(self.cancel_button)
+
+    def switch_pokemon(self, index):
+        # Switch the current Pokémon with the selected one
+        nouveau_pkmn = joueur.team[index]
+        joueur.team[index] = joueur.team[0]
+        joueur.team[0] = nouveau_pkmn
+        self.label_current_pokemon.setText(f"Current Pokémon: {joueur.team[0].nom}")
+
+        # Update the displayed Pokémon information in the combat window
+        self.parent().update_pokemon(self,nouveau_pkmn)
+        print("test")
+        self.close()
 
 def run_app():
     app = QApplication(sys.argv)
