@@ -16,12 +16,6 @@ from PyQt5.QtWidgets import QMainWindow, QApplication, QDialog, QHBoxLayout, QVB
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import Qt
 
-####### Définition des protagonistes #######
-
-joueur = Joueur((0,0))
-pokemon_team = joueur.team[0]
-index = rd.randint(0,150)
-pokemon_adv = liste_pokemon[index]
 
 ####### Programme principal #######
 
