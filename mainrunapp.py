@@ -44,7 +44,6 @@ class Overworld(QMainWindow):
                 self.carte.move("up")
                 joueur.position[1]-=1
             if matrice_collision[joueur.position[0]][joueur.position[1]]!=[]:
-                print(matrice_collision[joueur.position[0]][joueur.position[1]][0].nom)
                 combat_win=Combat()
                 combat_win.show()
 
@@ -57,7 +56,6 @@ class Overworld(QMainWindow):
                 self.carte.move("down")
                 joueur.position[1]+=1
             if matrice_collision[joueur.position[0]][joueur.position[1]]!=[]:
-                print(matrice_collision[joueur.position[0]][joueur.position[1]][0].nom)
                 combat_win=Combat()
                 combat_win.show()            
                 
@@ -71,7 +69,6 @@ class Overworld(QMainWindow):
                 self.carte.move("left")
                 joueur.position[0]-=1
             if matrice_collision[joueur.position[0]][joueur.position[1]]!=[]:
-                print(matrice_collision[joueur.position[0]][joueur.position[1]][0].nom)
                 combat_win=Combat()
                 combat_win.show()
 
@@ -83,7 +80,6 @@ class Overworld(QMainWindow):
                 self.carte.move("right")
                 joueur.position[0]+=1
             if matrice_collision[joueur.position[0]][joueur.position[1]]!=[]:
-                print(matrice_collision[joueur.position[0]][joueur.position[1]][0].nom)
                 combat_win=Combat()
                 combat_win.show()
 
