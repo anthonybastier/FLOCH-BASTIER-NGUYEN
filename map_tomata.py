@@ -9,18 +9,15 @@ import numpy as np
 from PyQt5 import QtCore
 from PyQt5 import QtWidgets
 from PyQt5 import QtGui
+from joueur import *
 
 
-class Joueur():
-    def __init__(self):
-        self.position=[0,0]
         
-        
-joueur=Joueur()
+joueur=Joueur([5,5])
 class Carte():
     def __init__(self,mainWindow):
         self.carte=QtWidgets.QLabel(mainWindow)
-        self.carte.setGeometry(QtCore.QRect(0,0,1500,1500))
+        self.carte.setGeometry(QtCore.QRect(0,0,2000,2000))
         self.carte.setText("")
         self.carte.setScaledContents(True)
         self.carte.setObjectName("carte")
