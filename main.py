@@ -10,5 +10,4 @@ from joueur import *
 from mainrunapp import run_app
 
 ####### Programme principal #######
-joueur = Joueur()
 run_app()

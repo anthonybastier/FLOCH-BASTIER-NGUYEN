@@ -17,14 +17,9 @@ from PyQt5 import QtTest
 from PyQt5.QtCore import Qt
 
 
-####### Définition des protagonistes #######
+####### Initialisation du joueur #######
 
-joueur = Joueur([5,5]) #joueur en 0,0
-pokemon_team = joueur.team[0]
-pokemon_team_HP_init = pokemon_team.HP
-pokemon_adv = matrice_collision[joueur.position[0]][joueur.position[1]][0] #pokemon_adv.nom renvoie son nom dcp
-pokemon_adv_HP_init = pokemon_adv.HP
-
+joueur = Joueur([5,5])
 
 ####### Programme principal #######
 
