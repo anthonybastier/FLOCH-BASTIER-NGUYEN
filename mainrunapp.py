@@ -23,20 +23,51 @@ class Overworld(QMainWindow):
         QMainWindow.__init__(self)
         self.setEnabled(True)
     
-    def keyReleaseEvent(self,event):
+    def keyPressEvent(self,event):
+
         if event.key()==Qt.Key_Up:
-            self.carte.move("up")
+            if (joueur.position[1]<=5 and joueur.position[1]>0) or (joueur.position[1]>=36 and joueur.position[1]<=39):
+                self.trainer.move("up")
+                joueur.position[1]-=1
+
+            elif joueur.position[1]>5 and joueur.position[1]<36:
+                self.carte.move("up")
+                joueur.position[1]-=1
+
+
         if event.key()==Qt.Key_Down:
-            self.carte.move("down")        
+            if (joueur.position[1]<=4 and joueur.position[1]>=0) or (joueur.position[1]>=35 and joueur.position[1]<39):
+                self.trainer.move("down")
+                joueur.position[1]+=1
+            elif joueur.position[1]<35 and joueur.position[1]>4:
+                self.carte.move("down")
+                joueur.position[1]+=1
+                
+                
+                
         if event.key()==Qt.Key_Left:
-            self.carte.move("left")        
+            if (joueur.position[0]<=5 and joueur.position[0]>0) or (joueur.position[0]>=36 and joueur.position[0]<=39):
+                self.trainer.move("left")
+                joueur.position[0]-=1
+            elif joueur.position[0]>5 and joueur.position[0]<36:
+                self.carte.move("left")
+                joueur.position[0]-=1
+
+
         if event.key()==Qt.Key_Right:
-            self.carte.move("right")
+            if (joueur.position[0]<=4 and joueur.position[0]>=0) or (joueur.position[0]>=35 and joueur.position[0]<39):
+                self.trainer.move("right")
+                joueur.position[0]+=1
+            elif joueur.position[0]<35 and joueur.position[0]>4:
+                self.carte.move("right")
+                joueur.position[0]+=1
+        print(joueur.position)
     
     def setupUI(self):
         self.resize(500,500)
         self.setWindowTitle("Pookemon")
         self.carte=Carte(self)
+        self.trainer=Sprite(self)
             
             
 class Combat(QMainWindow, Ui_Dialog):
@@ -59,7 +90,6 @@ class Combat(QMainWindow, Ui_Dialog):
     def chgt_pokemon(self, joueurs):
         dlg = Choix(self)
         dlg.exec()
-        hp_p1 = self.pokemon_adv.choix_attaque()(self.pokemon_actuel)
         
         #Mettre à jour le Pokémon actuel
         self.pokemon_actuel = joueur.team[0]
@@ -91,8 +121,9 @@ class Combat(QMainWindow, Ui_Dialog):
             
             if hp_p2 <= 0: #Combat gagné
                 self.zone_a_edit.setText("You caught " + self.pokemon_adv.nom + " !")
-                liste_entites.remove_pokemon(self.pokemon_adv.position)
                 QtTest.QTest.qWait(1000)
+                liste_entites.remove_pokemon(self.pokemon_adv.position)
+                joueur.team.append(self.pokemon_adv)
                 self.close()
                 joueur.soigner_equipe()
             else:
@@ -152,7 +183,7 @@ class Combat(QMainWindow, Ui_Dialog):
                     self.chgt_pokemon(joueur)
                 else:
                     #Combat perdu
-                    self.zone_a_edit.setText(f"Out of usable Pokémon !")
+                    self.zone_a_edit.setText("Out of usable Pokémon !")
                     QtTest.QTest.qWait(1000)
                     self.close()
                     joueur.soigner_equipe()
