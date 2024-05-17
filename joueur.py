@@ -13,7 +13,7 @@ import random as rd
 import copy
 
 class Joueur:
-    def __init__(self, position = (0,0)):
+    def __init__(self, position = [5,5]):
         """
         Initialise le joueur, avec les trois starters de la 1ere génération.
 
@@ -29,6 +29,10 @@ class Joueur:
         
         self.position = position
         self.team = [copy.copy(liste_pokemon[0]),copy.copy(liste_pokemon[3]),copy.copy(liste_pokemon[6])]
+        #Définition des pokémons de l'équipe comme attrapés
+        self.team[0].rencontre = True
+        self.team[1].rencontre = True
+        self.team[2].rencontre = True
     
     def a_un_pokemon_non_ko(self):
         """
