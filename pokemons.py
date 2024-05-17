@@ -76,7 +76,7 @@ class Pokemon():
         degats = self.sp_atk
         k = 1 #facteur multiplicatif pour le type 1
         l = 1 #facteur multiplicatif pour le type 2
-        types = pd.read_csv("data\types.csv", index_col=0)
+        types = pd.read_csv(r"data\types.csv", index_col=0)
         k = types.loc[self.type, pokemon.type] #Trouve le facteur correspondant aux types dans le tableau des affinités
         if pokemon.type2 != "":
             l = types.loc[self.type, pokemon.type2] #De même avec le second type
@@ -89,7 +89,7 @@ class Pokemon():
     
     def choix_attaque(self):
         """
-        Renvoie un choix aléatoire d'attaque ; utilisé pour les Pokémons adverses.
+        Renvoie un choix aléatoire d'attaque ; utilisé par les Pokémons adverses sur le Pokémon du joueur.
 
         Returns
         -------
