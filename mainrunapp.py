@@ -38,6 +38,10 @@ class Overworld(QMainWindow):
             elif joueur.position[1]>5 and joueur.position[1]<36:
                 self.carte.move("up")
                 joueur.position[1]-=1
+            if matrice_collision[joueur.position[0]][joueur.position[1]]!=[]:
+                print(matrice_collision[joueur.position[0]][joueur.position[1]][0].nom)
+                combat_win=Combat()
+                combat_win.show()
 
 
         if event.key()==Qt.Key_Down:
@@ -47,6 +51,10 @@ class Overworld(QMainWindow):
             elif joueur.position[1]<35 and joueur.position[1]>4:
                 self.carte.move("down")
                 joueur.position[1]+=1
+            if matrice_collision[joueur.position[0]][joueur.position[1]]!=[]:
+                print(matrice_collision[joueur.position[0]][joueur.position[1]][0].nom)
+                combat_win=Combat()
+                combat_win.show()            
                 
                 
                 
@@ -57,7 +65,10 @@ class Overworld(QMainWindow):
             elif joueur.position[0]>5 and joueur.position[0]<36:
                 self.carte.move("left")
                 joueur.position[0]-=1
-
+            if matrice_collision[joueur.position[0]][joueur.position[1]]!=[]:
+                print(matrice_collision[joueur.position[0]][joueur.position[1]][0].nom)
+                combat_win=Combat()
+                combat_win.show()
 
         if event.key()==Qt.Key_Right:
             if (joueur.position[0]<=4 and joueur.position[0]>=0) or (joueur.position[0]>=35 and joueur.position[0]<39):
@@ -66,11 +77,11 @@ class Overworld(QMainWindow):
             elif joueur.position[0]<35 and joueur.position[0]>4:
                 self.carte.move("right")
                 joueur.position[0]+=1
-        print(joueur.position)
-        if matrice_collision[joueur.position[0]][joueur.position[1]]!=[]:
-            print(matrice_collision[joueur.position[0]][joueur.position[1]][0].nom)
-            combat_win=Combat()
-            combat_win.show()
+            if matrice_collision[joueur.position[0]][joueur.position[1]]!=[]:
+                print(matrice_collision[joueur.position[0]][joueur.position[1]][0].nom)
+                combat_win=Combat()
+                combat_win.show()
+
     
     def setupUI(self):
         self.resize(500,500)
