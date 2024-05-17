@@ -1,19 +1,29 @@
 # -*- coding: utf-8 -*-
 """
-Created on Mon May 13 09:43:58 2024
-
-@author: anais
+@authors: Anais, Anthony, Thomas
 """
 ####### Imports #######
-
 from PyQt5 import QtCore, QtGui, QtWidgets
 from joueur import *
 from pokemons import *
 
-####### Interface Graphique de Combat #######
+####### Interface graphique de combat #######
 
 class Ui_Dialog(object):
     def setupUi(self, pokemon_team, pokemon_adv, Dialog):
+        """
+        Génère l'interface graphique du combat.
+
+        Parameters
+        ----------
+        pokemon_team : Pokemon
+            Pokémon actuel du joueur.
+        pokemon_adv : Pokemon
+            Pokémon adverse.
+        Dialog : 
+            Objet PyQt pour définir la taille de la fenêtre.
+
+        """
         Dialog.setObjectName("Dialog")
         Dialog.resize(688, 888)
         pokemon_adv_HP_init = pokemon_adv.HP
@@ -124,6 +134,19 @@ class Ui_Dialog(object):
         QtCore.QMetaObject.connectSlotsByName(Dialog)
 
     def retranslateUi(self, pokemon_team, pokemon_adv, Dialog):
+        """
+        Initialise le dialogue du combat.
+
+        Parameters
+        ----------
+        pokemon_team : Pokemon
+            Pokémon actuel du joueur.
+        pokemon_adv : Pokemon
+            Pokémon adverse.
+        Dialog :
+            Objet PyQt.
+
+        """
         pokemon_adv_HP_init = pokemon_adv.HP
         pokemon_team_HP_init = pokemon_team.HP
         _translate = QtCore.QCoreApplication.translate
@@ -139,6 +162,18 @@ class Ui_Dialog(object):
         self.zone_a_edit.setText(_translate("Dialog", f"A {pokemon_adv.nom} appears !"))
 
     def update_pokemon(self, Dialog, pokemon):
+        """
+        Fonction utilisée pour mettre à jour les données et le sprite du Pokémon
+        actuel du joueur en cas de changement.
+
+        Parameters
+        ----------
+        Dialog :
+            Objet PyQt.
+        pokemon : Pokemon
+            Nouveau Pokémon choisi par le joueur.
+
+        """
         self.Nom_pokemon_team.setText(f"{pokemon.nom}")
         self.HP_pokemon_team.setText(f"HP {pokemon.HP}/{pokemon.HP}")
         self.sprite_team.setPixmap(QtGui.QPixmap(f"data/pokemon_sprite/{pokemon.nom}_d.png"))
